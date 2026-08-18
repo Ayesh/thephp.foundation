@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PHP 8.4: How Property Hooks Happened &mdash; The PHP Foundation &mdash; Supporting, Advancing, and Developing the PHP Language</title>
+    <meta name="description" content="The PHP Foundation &mdash; Supporting, Advancing, and Developing the PHP Language">
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="index, follow">
+        <link href="https://phpc.social/@thephpf" rel="me" />
+    <link rel="stylesheet" href="https://thephp.foundation/assets/css/app.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.6.0/styles/base16/danqing.min.css">
+    <script src="//unpkg.com/@highlightjs/cdn-assets@11.6.0/highlight.min.js"></script>
+
+    <meta name="yandex-verification" content="6990192232fdf071" />
+    <meta name="msvalidate.01" content="5D1EB82347E6BF271A01DCDBF7E59BED" />
+
+    <meta property="og:url" content="https://thephp.foundation/blog/2024/11/01/how-hooks-happened/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="PHP 8.4: How Property Hooks Happened">
+    <meta property="og:description" content="The PHP Foundation &mdash; Supporting, Advancing, and Developing the PHP Language">
+    <meta property="og:image" content="https://thephp.foundation/assets/share/2024-11-01-how-hooks-happened.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="https://thephp.foundation">
+    <meta property="twitter:url" content="https://thephp.foundation/blog/2024/11/01/how-hooks-happened/">
+    <meta name="twitter:title" content="PHP 8.4: How Property Hooks Happened">
+    <meta name="twitter:description" content="The PHP Foundation &mdash; Supporting, Advancing, and Developing the PHP Language">
+    <meta name="twitter:image" content="https://thephp.foundation/assets/share/2024-11-01-how-hooks-happened.png">
+
+    <link rel="apple-touch-startup-image" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="shortcut icon" sizes="76x76" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="shortcut icon" sizes="120x120" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="shortcut icon" sizes="128x128" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="shortcut icon" sizes="152x152" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="shortcut icon" sizes="196x196" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="shortcut icon" sizes="512x512" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="shortcut icon" sizes="1024x1024" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="shortcut icon" sizes="2048x2048" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="apple-touch-icon" sizes="128x128" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="apple-touch-icon" sizes="196x196" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="apple-touch-icon" sizes="512x512" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="apple-touch-icon" sizes="1024x1024" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="apple-touch-icon" sizes="2048x2048" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+
+    <link rel="alternate" type="application/atom+xml" href="https://thephp.foundation/atom.xml"
+          title="The PHP Foundation activity feed"/>
+                <script src="//cdn.jsdelivr.net/npm/anchor-js/anchor.min.js"></script>
+    </head>
+<body class="bg-white">
+
+<div role="region" aria-label="PHPverse 2025 announcement" class="w-full bg-green-500 text-white text-center py-1 text-sm font-medium z-50 hover:text-white hidden">
+    <a href="banner link stub" target="_blank" rel="noopener noreferrer" class="text-white no-underline hover:underline hover:text-white visited:hover:text-white">banner text stub</a>
+</div>
+
+<header x-data="{ isOpen: false }" @keydown.escape="isOpen = false" @click.away="isOpen = false" itemscope
+        itemtype="https://schema.org/WPHeader">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between relative">
+        <div class="absolute inset-x-0 bottom-0 h-px bg-slate-900/5"></div>
+        <div class="flex lg:flex-1 items-center gap-4">
+            <a href="https://thephp.foundation/" class="-m-1.5 p-1.5">
+                <img class="h-16 w-auto" src="https://thephp.foundation/assets/icons/php_foundation.svg"
+                     alt="PHP Foundation">
+            </a>
+            <span class="text-[#27282c] font-semibold text-sm md:text-xl" itemprop="headline">The PHP Foundation</span>
+        </div>
+        <div class="flex lg:hidden">
+            <button type="button"
+                    @click="isOpen = true"
+                    class="m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                     aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+                </svg>
+            </button>
+        </div>
+        <div class="hidden lg:flex lg:gap-x-12" itemscope itemtype="https://schema.org/SiteNavigationElement">
+            <a href="https://thephp.foundation/structure" class="text-gray-700 hover:underline" itemprop="url">Who we are</a>
+
+            <a href="https://thephp.foundation/foundation" class="text-gray-700 hover:underline" itemprop="url">What we do</a>
+
+            <a href="https://thephp.foundation/blog" class="text-gray-700 hover:underline" itemprop="url">News</a>
+
+            <a href="https://thephp.foundation/presentations" class="text-gray-700 hover:underline" itemprop="url">Talks</a>
+
+            <a href="https://thephp.foundation/contact" class="text-gray-700 hover:underline" itemprop="url">Contact</a>
+        </div>
+        <div class="hidden lg:flex lg:flex-1 lg:justify-end items-center gap-8">
+            <a href="https://php.net" target="_blank" rel="noopener noreferrer"
+               class="text-sm font-semibold leading-6 text-gray-700 nav-org hover:border-none hover:underline">
+                php.net</a>
+
+            <a href="/sponsor" class="button-link">Sponsor</a>
+        </div>
+    </nav>
+    <div x-show="isOpen" x-cloak>
+        <div class="fixed inset-0 z-50"></div>
+        <div class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+            <div class="mx-auto flex max-w-7xl items-center justify-between relative">
+                <div class="flex lg:flex-1 items-center gap-4">
+                    <a href="https://thephp.foundation/" class="-m-1.5 p-1.5">
+                        <img class="h-16 w-auto" src="https://thephp.foundation/assets/icons/php_foundation.svg"
+                             alt="PHP Foundation">
+                    </a>
+                    <span class="text-[#27282c] font-semibold text-sm md:text-xl">The PHP Foundation</span>
+                </div>
+                <div class="flex">
+                    <button type="button"
+                            @click="isOpen = false"
+                            class="m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                             aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <nav class="mt-6 flow-root px-6 py-6">
+                <div class="-my-6 divide-y divide-gray-500/10">
+                    <div class="space-y-2 py-6" itemscope itemtype="https://schema.org/SiteNavigationElement">
+                        <a href="https://thephp.foundation/structure" itemprop="url"
+                           class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 no-underline">Who
+                            we are</a>
+
+                        <a href="https://thephp.foundation/foundation" itemprop="url"
+                           class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 no-underline">What
+                            we do</a>
+
+                        <a href="https://thephp.foundation/blog" itemprop="url"
+                           class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 no-underline">News</a>
+
+                        <a href="https://thephp.foundation/presentations" itemprop="url"
+                           class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 no-underline">Talks</a>
+
+                        <a href="https://thephp.foundation/contact" itemprop="url"
+                           class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 no-underline">Contact</a>
+                    </div>
+                    <div class="py-6">
+                        <a href="/sponsor" rel="noopener noreferrer"
+                           class="block py-2 text-center no-underline px-6 !text-white bg-[#7f52ff] rounded-3xl hover:bg-[rgba(127,82,255,.8)]">Sponsor</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="bg-white px-6 lg:px-8 my-16" itemscope itemtype="https://schema.org/Article">
+    <div class="mx-auto max-w-3xl text-base leading-7 text-gray-700">
+        <h1 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl" itemprop="name">PHP 8.4: How Property Hooks Happened</h1>
+
+        <div class="flex flex-col md:flex-row md:items-center gap-x-4 text-xs mt-2">
+            Published on <span itemprop="datePublished">Nov 06, 2024</span>
+            <div>
+                                
+                                <span itemprop="publisher" itemscope itemtype="https://schema.org/Person"><a
+                        href="https://www.garfieldtech.com/" itemprop="url" class="no-underline" target="_blank"
+                        rel="noopener noreferrer"><span itemprop="name">Larry Garfield</span></a></span>                                            </div>
+        
+                <div class="flex gap-x-2 mt-2 md:mt-0">
+                        <a href="https://thephp.foundation/blog/tag/stories"
+               class="rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100 no-underline">
+                Stories
+            </a>
+                    </div>
+                </div>
+
+        <div class="mt-6 text-xl leading-8" itemprop="text">
+            <p>PHP 8.4 is coming on 21 November this year.  It includes a host of new functionality, but the biggest, in more ways than one, is Property hooks.  Given the excitement around it, as well as its size, the PHP Foundation's Roman Pronsky asked me to write up a bit about the process we went through to produce this beast.</p>
+
+<p>What eventually became the twin RFCs of Property Hooks and Asymmetric Visibility is actually a very old discussion.  We'll look back at the decade-plus saga that got us here, how Ilija Tovilo and I got sucked in, how the design came to be, and how we managed to get it across the finish line.  Here's a teaser: It would not have happened without the PHP Foundation.</p>
+
+<h2 id="ancient-history">Ancient history</h2>
+
+<p>Ilija and I were not the first RFC to propose "property accessors," as they're called in most languages.  In fact, our RFC was the fifth:</p>
+
+<ol>
+<li>2009: <a href="https://wiki.php.net/rfc/propertygetsetsyntax">Property get/set syntax</a> by Dennis Robinson.  The core concepts and arguments behind it are all there, and haven't really changed in 15 years.  It never went to a vote.</li>
+<li>2012: <a href="https://wiki.php.net/rfc/propertygetsetsyntax-v1.2">Property get/set syntax v1.2</a> by Clint Priest and Nikita Popov.  It didn't pass the 2/3 threshold for a vote, but did pass 50%.</li>
+<li>2013: <a href="https://wiki.php.net/rfc/propertygetsetsyntax-alternative-typehinting-syntax">Property get/set syntax alternate typehinting syntax</a>, by Nikita Popov.  An alternate approach that proved very unpopular, failing 3 to 12.  However, it included a shorthand syntax that looks suspiciously like what eventually became property types.</li>
+<li>2021: <a href="https://wiki.php.net/rfc/property_accessors">Property Accessors</a> by Nikita Popov. More of a brainstorm of what property accessors could be, including specific use-case options like <code>lazy</code> or <code>guard</code>.  It never went to a vote, but Nikita did note that "We could likely get 80% of the value of accessors by supporting read-only properties and 90% by also supporting private-write properties."  (I don't fully agree, but much of the value is in private-write.)</li>
+</ol>
+
+<p>All of these attempts had a few things in common:</p>
+
+<ul>
+<li>Pseudo-functions that live on properties and intercept get/set operations.</li>
+<li>Asymmetric visibility</li>
+<li>Interface properties</li>
+</ul>
+
+<h2 id="a-new-team-enters-the-arena">A new team enters the arena</h2>
+
+<p>Fast forward to the summer of 2022.  Ilija Tovilo decided he wanted to take a swing at accessors next, and approached me for help.  Ilija and I had already worked together on the <a href="https://wiki.php.net/rfc/enumerations">Enums RFC</a>, so we knew we worked well together.  In part, that's because we have very different skill sets.  Ilija is rapidly becoming one of the most PHP engine-knowledgeable people around and quite proficient at writing C code, but is, by his own admission, not the most proficient writer of English.  I am a weirdo who enjoys language research, designing away edge cases, and can type fast enough to keep up with the Internals mailing list.  We complement each other well.</p>
+
+<p>Illija is also fully funded by the PHP Foundation to work on the engine, without which this amount of work would have been impossible.  I work on a volunteer basis, and as my employers allow.</p>
+
+<p>(Side note: As of this writing, I am between jobs.  If you're looking for a highly-experienced PHP Staff/Principal Engineer with experience in design, architecture, and leading teams, please <a href="https://github.com/Crell/">reach out</a> and let's talk!)</p>
+
+<h2 id="research%2C-then-development">Research, then development</h2>
+
+<p>With the initial goal of "making Nikita's proposal work-ish," I started digging into the research and design side.  My <a href="https://github.com/Crell/php-rfcs/blob/master/property-hooks/research.md">initial brainstorming</a> shows where our thoughts were at the time.  In short:</p>
+
+<ul>
+<li>There are two models of accessors: In untyped languages without visibility controls&mdash;like JavaScript and Python&mdash;accessors are methods with funny syntax.  In typed languages with visibility controls&mdash;like C#, Swift, and Kotlin&mdash;accessors are enhancements to a defined property.  As PHP is, let's face it, a typed language with visibility controls, that was clearly the model to follow (as had all previous RFCs).</li>
+<li>Yes, we really would need asymmetric visibility, accessors, and interface properties.  While technically separate features, they make the most sense in combination.</li>
+<li>The whole scope would be huge, so we needed to break it up where we could.  Splitting Asymmetric visibility off to its own RFC was the most natural place, which would be made easier by using Swift's <code>private(set)</code> style syntax.</li>
+</ul>
+
+<p>So in August of 2022 we put forward the first <a href="https://wiki.php.net/rfc/asymmetric-visibility">asymmetric visibility</a> RFC.  Given there was already a clear appetite for such functionality based on list discussions and on the recent <code>readonly</code> addition, which Nikita explicitly intended as a "junior asymmetric visibility," we expected some bikeshedding but overall a straightforward process.</p>
+
+<p>Boy were we wrong.</p>
+
+<h2 id="asymmetric-support">Asymmetric support</h2>
+
+<p>The Asymmetric Visibility RFC was far more contentious than we expected. Some people hated the idea.  Some wouldn't accept anything but the C#-style syntax.  We ran a poll of various different approaches, and our initial proposal (Swift-style placement and syntax) ended up winning by a slim margin, but disappointingly "the consensus position isn't your position, sorry" didn't really persuade anyone.</p>
+
+<p>Eventually, Asymmetric visibility finally went down in a 14:12 vote in January of 2023.  RFCs need 2/3 majorities to pass, so 14:12, while a simple majority, isn't enough.</p>
+
+<h2 id="hooking-it-up">Hooking it up</h2>
+
+<p>The failure of asymmetric visibility was a blow to both of us.  In most cases we didn't even know why the people who voted "no" did so, which made addressing their concerns guesswork.  Had we just wasted our time?  Would accessors even be acceptable?  The current RFC process is very bad at providing that kind of actionable feedback.</p>
+
+<p>While no one from the Foundation mentioned it, we were also both acutely aware that Ilija had been working on paid time for a proposal that ended up failing.</p>
+
+<p>Nonetheless, we had split the RFC in two deliberately so that even if only one was successful there was still a benefit.  We therefore turned our attention to the accessor part of the proposal (which included interface properties) and continued working.</p>
+
+<p>The model we developed was essentially a "direct port from Swift, with a few slight renames."</p>
+
+<p>The initial design included:</p>
+
+<ul>
+<li><code>get</code> - Totally takes over reading, and there's no physical property created.</li>
+<li><code>set</code> - Totally takes over writing, and there's no physical property created.</li>
+<li><code>beforeSet</code> - Intercepts the writing of a property but doesn't change the actual write itself.</li>
+<li><code>afterSet</code> - Called after the property is written, doesn't change the actual write itself.</li>
+</ul>
+
+<p>This is also when we changed the name from "accessors" to "hooks," which seemed a more accurate description given that model.  This later ended up not making sense, but Ilija had already taken the time to rename everything in the patch, so it was too much work to change back.  Sorry.</p>
+
+<p>The RFC text itself grew and grew.  PHP is a very mature (read: complex) language, and so there were lots of nooks and crannies that we had to account for.  Properties touch on almost everything: References, arrays, inheritance, final properties, interfaces, interaction with <code>readonly</code>, interaction with <code>__get</code>/<code>__set</code>, serialization, constructor property promotion, reflection...</p>
+
+<p>PHP is a big language, and we needed to think through and implement every possible edge case to avoid booby traps.</p>
+
+<h2 id="some-very-good-advice">Some very good Advice</h2>
+
+<p>We finally had a working design and implementation by April 2023 or so, but were quite nervous about it.  It was big, and we were both still smarting from the loss of asymmetric visibility.  Roman suggested that he run it past the PHP Foundation's Advisory Board for feedback first before going to the list, which turned out to be the best thing we could do.</p>
+
+<p>The Board came back with mostly positive feedback; they liked the concept, the design, the detail... but having 4 separate hooks felt very clumsy to them.  Especially with get/set wiping the backing property entirely and leaving the developer on their own.</p>
+
+<blockquote>
+<p><strong>The PHP Foundation's Advisory Board</strong> serves as a vital bridge between our major sponsors and the PHP development community. It's a Slack channel where we share early updates, insights, and ask for feedback. As well as receive insights and queries from sponsors' representatives. <br><br>
+
+Companies interested in joining this influential group and directly contributing to the future of PHP can become members of the Advisory Board by contributing a minimum of $12,000 to The&nbsp;PHP&nbsp;Foundation as at least a Silver Sponsor. <br/><br/>
+
+<strong><a href="https://thephp.foundation/sponsor/">Learn more about sponsorship opportunities.</a></strong><br/>
+</p>
+</blockquote>
+
+<p>I don't have the original chat log, but that resulted in a brief exchange that went approximately like this:</p>
+
+<pre><code class="text">Roman: The Advisory Board says three different set-ish hooks are a problem  
+Larry: Well, we kinda have to, because you can't access a property 
+       from within its own hook, that doesn't make sense.  
+Ilija: Er, actually we could do that easily.  
+Larry: Wait, what?  That... how... why...  
+Larry: *does some research*  
+Larry: Well crap, that's exactly what Kotlin does.  
+       Why didn't we research Kotlin in the first place?  
+Ilija: ¯\_(ツ)_/¯  
+Ilija: Well, I just switched it over to that. Looks nicer.
+</code></pre>
+
+<p>And so there we were, with half as many syntaxes for the same functionality, and a feature name (hooks) that no longer made sense.  Oh well.</p>
+
+<p>We finally made a public proposal at the start of May 2023.  Initial feedback was quite positive, though there was some pushback, including around the syntax from people who wanted the Javascript/Python style (naturally).  And the length.  Oh, the length.  If hooks isn't the longest RFC ever proposed, it's close.  But as we reiterated many times, that's because the problem space itself is highly complex.</p>
+
+<p>Sadly, time was not on our side.  Ilija was still working out some implementation edge cases and PHP 8.3’s feature-freeze was rapidly approaching.  So in early July, almost exactly a year after we started working on it, we decided to postpone hooks until 8.4 to give such a large change enough time to settle in and get adjusted if needed.</p>
+
+<h2 id="take-2">Take 2</h2>
+
+<p>After many distractions, we were able to bring the topic back up in <a href="https://externals.io/message/122445">February of 2024</a>, with the intent to bring it to a vote quickly, in March.  (We were so naive.)</p>
+
+<p>There was a lot more discussion this time around, though a lot of it was re-hashing edge cases we'd already addressed.  We also spent a considerable amount of time talking with the Foundation's developer team.  They, by and large, represent the most experienced developers of PHP Internals today, and were an invaluable resource.  That we could talk to them in real time via the Foundation's private chat also helped, as that's a far easier way to handle back-and-forth than a mailing list.</p>
+
+<p>There were a few significant changes we did end up making in response to feedback, from both the list and the Foundation team.  Most importantly, Ilija managed to make array properties work, which had been a challenge due to references.  Once again, being able to attack the problem from two directions (design and ergonomics from me, implementation from Ilija) let us improve the overall experience dramatically.</p>
+
+<h2 id="down-to-the-wire">Down to the wire</h2>
+
+<p>Even then, with all the positive feedback, it wasn't clear to us if it would pass.  Many people on the list had expressed support, but a lot of them were non-voters.</p>
+
+<p>Others had expressed essentially "fearful support"; They liked the idea, couldn't find fault with the implementation, but were concerned about just how big and complex the feature was.</p>
+
+<p>Still others, for various reasons, suggested moving certain sub-features to a separate, future RFC. Which is often code for "I don't like this part, but I don't want to vote against the RFC because of it, so please let me vote against it separately."  We explained, repeatedly, that this was already the slimmed down, partial version.  The other part was asymmetric visibility.</p>
+
+<p>After a lot of discussion and with a lot of trepidation, we called the vote in mid-April of 2024.  It passed 42:2.  I don't understand PHP Internals at times.</p>
+
+<h2 id="asymmetric-visibility-2%3A-the-wrath-of-ilija">Asymmetric Visibility 2: The Wrath of Ilija</h2>
+
+<p>Several people pointed out that hooks without asymmetric visibility had significant holes in it.  They were right, which is why we'd originally proposed that first.  We had decided that if hooks pass, we would take a second swing at asymmetric visibility.  So we did.</p>
+
+<p>The only actionable feedback we'd gotten the first time around was that without support for combining <code>readonly</code> and asymmetric visibility, the RFC felt "incomplete."  We went through a few variations on how to address that before landing on the final solution: Change <code>readonly</code> from being implicitly <code>private(set)</code> to implicitly <code>protected(set)</code>.  Otherwise, the discussion was mostly a retread of the year before.</p>
+
+<p>We were still stressing out about this one, too.  It hadn't passed before, why would it now?  However, this time it passed 24:7 at the start of August 2024.</p>
+
+<p>Looking at the results, while there were two people who changed from a No to a Yes, the biggest change from the first vote was simply who voted.  Most of the previous No votes... didn't vote this time.  But entirely new people showed up to vote yes.  Showing up to vote matters, folks.</p>
+
+<h2 id="on-to-the-next-adventure">On to the next adventure</h2>
+
+<p>25 months after the process started, PHP now joins the cadre of languages with robust, flexible properties that can do more than just hold dumb values.  It's been a wild ride, and at many points a needlessly stressful one.  The end result, though, is a host of powerful new features that make PHP 8.4 the most exciting PHP release in several years.  Really, they're the best thing since enums...</p>
+
+<p>I hope this tale is a useful insight for folks into how the sausage is made.  Now go enjoy interface properties, hooks, and asymmetric visibility.  Or enjoy not using hooks, but having the option to, which eliminates a lot of code.  Both work.</p>
+
+        </div>
+
+        <ul role="list" class="border-t pt-5 my-5 divide-y divide-gray-200 xl:col-span-3">
+                                                <li class="flex flex-col gap-10 py-12 first:pt-0 last:pb-0 sm:flex-row">
+                <img src="https://avatars.githubusercontent.com/u/254863?v=4" alt="Larry Garfield"
+                     class="w-16 h-16 rounded-full lg:w-20 lg:h-20"/>
+                <div class="max-w-xl flex-auto leading-6 space-y-1">
+                    <div class="text-lg/8 font-semibold tracking-tight text-gray-900">Larry Garfield</div>
+                                        <ul class="flex space-x-4 list-none p-0 m-0">
+                        
+                                                <li>
+                            <a href="https://phpc.social/@Crell"
+                               class="text-gray-400 hover:text-gray-500" rel="noreferrer noopener"
+                               target="_blank" itemprop="url">
+                                <span class="sr-only">Mastodon</span>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z"/>
+                                </svg>
+                            </a>
+                        </li>
+                        
+                        
+                                                <li>
+                            <a href="https://github.com/crell"
+                               class="text-gray-400 hover:text-gray-500" rel="noreferrer noopener"
+                               target="_blank" itemprop="url">
+                                <span class="sr-only">GitHub</span>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 16 16"
+                                     aria-hidden="true">
+                                    <path d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z"></path>
+                                </svg>
+                            </a>
+                        </li>
+                                            </ul>
+                </div>
+            </li>
+                                </ul>
+
+        <div class="border-t pt-5 my-5">
+            <div
+    class="thread-container"
+    data-reddit-thread=""
+    data-reddit-search="PHP"
+    data-reddit-suggest-title="PHP 8.4: How Property Hooks Happened"
+    data-reddit-max-depth="10"
+    data-reddit-show-content="false"
+    data-reddit-show-controls="true"
+></div>
+<script>window.REDDITIFY_PROXY_URL = 'https://redditify-proxy.root-8f3.workers.dev';</script>
+<link rel="stylesheet" href="https://unpkg.com/redditify/dist/redditify.css">
+<script src="https://unpkg.com/redditify/dist/redditify.min.js"></script>
+
+        </div>
+
+        <div class="border-t pt-5 my-5">
+                        <nav class="flex flex-row justify-between article -mx-2 mb-5">
+                                <a href="https://thephp.foundation/blog/2024/10/21/web-services-tool-for-php-fpm/"
+                   class="flex flex-col w-1/2 border p-2 mx-2 rounded hover:border-[#7f52ff] transition-all no-underline">
+                    <div class="mb-1 text-sm text-gray-600 font-medium">Previous</div>
+                    <div class="font-bold text-blue-500">Introducing Web&nbsp;Services&nbsp;Tool for&nbsp;PHP-FPM</div>
+                </a>
+                
+                                <a href="https://thephp.foundation/blog/2024/11/19/pie-pre-release/"
+                   class="flex flex-col w-1/2 border p-2 mx-2 rounded hover:border-[rgba(127,82,255,.8)] transition-all no-underline">
+                    <div class="mb-1 text-sm text-gray-600 font-medium">Next</div>
+                    <div class="font-bold text-blue-500">Announcing the Pre-Release of the PHP Installer for Extensions (PIE)</div>
+                </a>
+                            </nav>
+            
+            <div>
+                <a href="https://github.com/ThePHPF/thephp.foundation/edit/main/source/_posts/2024-11-01-how-hooks-happened.md"
+                   class="nav-org" rel="noopener noreferrer" target="_blank">Edit this page on GitHub</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-gray-900">
+    <div class="mx-auto max-w-7xl overflow-hidden px-6 py-12 lg:px-8">
+        <ul class="list-none grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-1 max-w-xl mx-auto text-sm leading-6 text-gray-400" >
+            <li><a href="/sponsor"          class="text-gray-400 hover:text-gray-100 no-underline">Sponsor</a></li>
+            <li><a href="/structure"        class="text-gray-400 hover:text-gray-100 no-underline">Structure</a></li>
+            <li><a href="/structure#admins" class="text-gray-400 hover:text-gray-100 no-underline">Board</a></li>
+            <li><a href="/structure#core_developers"        class="text-gray-400 hover:text-gray-100 no-underline">Developers</a></li>
+            <li><a href="/blog"             class="text-gray-400 hover:text-gray-100 no-underline">News</a></li>
+            <li><a href="/presentations"    class="text-gray-400 hover:text-gray-100 no-underline">Talks</a></li>
+            <li><a href="/branding"         class="text-gray-400 hover:text-gray-100 no-underline">Brand Guide</a></li>
+            <li><a href="/governance"       class="text-gray-400 hover:text-gray-100 no-underline">Governance</a></li>
+            <li><a href="/code-of-conduct"  class="text-gray-400 hover:text-gray-100 no-underline">Code of Conduct</a></li>
+            <li><a href="/contact"          class="text-gray-400 hover:text-gray-100 no-underline">Contact</a></li>
+        </ul>
+
+        <div class="mt-10 flex justify-center space-x-10 items-center">
+            <a href="https://twitter.com/thephpf" target="_blank" rel="noopener noreferrer"
+               class="text-gray-400 hover:text-gray-500">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                    <g>
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                    </g>
+                </svg>
+            </a>
+
+            <a href="https://github.com/ThePHPF/thephp.foundation" class="text-gray-400 hover:text-gray-500"
+               target="_blank" rel="noopener noreferrer">
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                          clip-rule="evenodd"/>
+                </svg>
+            </a>
+
+            <a href="https://phpc.social/@thephpf" class="text-gray-400 hover:text-gray-500" target="_blank"
+               rel="noopener noreferrer">
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z"/>
+                </svg>
+            </a>
+
+            <a href="https://www.linkedin.com/company/phpfoundation/" class="text-gray-400 hover:text-gray-500"
+               target="_blank" rel="noopener noreferrer">
+                <svg class="h-6 w-6"
+                     viewBox="0 0 56.693 56.693" fill="currentColor"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                        <path d="M30.071,27.101v-0.077c-0.016,0.026-0.033,0.052-0.05,0.077H30.071z"/>
+                        <path
+                                d="M49.265,4.667H7.145c-2.016,0-3.651,1.596-3.651,3.563v42.613c0,1.966,1.635,3.562,3.651,3.562h42.12   c2.019,0,3.654-1.597,3.654-3.562V8.23C52.919,6.262,51.283,4.667,49.265,4.667z M18.475,46.304h-7.465V23.845h7.465V46.304z    M14.743,20.777h-0.05c-2.504,0-4.124-1.725-4.124-3.88c0-2.203,1.67-3.88,4.223-3.88c2.554,0,4.125,1.677,4.175,3.88   C18.967,19.052,17.345,20.777,14.743,20.777z M45.394,46.304h-7.465V34.286c0-3.018-1.08-5.078-3.781-5.078   c-2.062,0-3.29,1.389-3.831,2.731c-0.197,0.479-0.245,1.149-0.245,1.821v12.543h-7.465c0,0,0.098-20.354,0-22.459h7.465v3.179   c0.992-1.53,2.766-3.709,6.729-3.709c4.911,0,8.594,3.211,8.594,10.11V46.304z"/>
+                    </g>
+                </svg>
+            </a>
+        </div>
+        <div class="mt-10 text-center text-xs leading-5 text-gray-500" itemprop="copyrightHolder">&copy; The PHP Foundation</div>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const anchors = new AnchorJS()
+        anchors.add()
+
+        for (const element of document.getElementsByClassName('anchorjs-link')) {
+            element.addEventListener('click', function () {
+                navigator.clipboard.writeText(window.location.origin + window.location.pathname + element.getAttribute('href'))
+            })
+        }
+    })
+</script>
+
+
+<script>hljs.highlightAll();</script>
+
+<script src="https://cdn.usefathom.com/script.js" data-site="PJKRZUTE" defer></script>
+<!-- Matomo -->
+<script>
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+        var u="https://analytics.thephp.foundation/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+</script>
+<noscript><p><img referrerpolicy="no-referrer-when-downgrade" src="https://analytics.thephp.foundation/matomo.php?idsite=1&amp;rec=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Matomo Code -->
+
+</body>
+</html>

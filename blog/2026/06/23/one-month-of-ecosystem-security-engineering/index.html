@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>One Month of Ecosystem Security Engineering &mdash; The PHP Foundation &mdash; Supporting, Advancing, and Developing the PHP Language</title>
+    <meta name="description" content="A first-month update on the PHP Foundation&#039;s ecosystem security work">
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="index, follow">
+        <link href="https://phpc.social/@thephpf" rel="me" />
+    <link rel="stylesheet" href="https://thephp.foundation/assets/css/app.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.6.0/styles/base16/danqing.min.css">
+    <script src="//unpkg.com/@highlightjs/cdn-assets@11.6.0/highlight.min.js"></script>
+
+    <meta name="yandex-verification" content="6990192232fdf071" />
+    <meta name="msvalidate.01" content="5D1EB82347E6BF271A01DCDBF7E59BED" />
+
+    <meta property="og:url" content="https://thephp.foundation/blog/2026/06/23/one-month-of-ecosystem-security-engineering/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="One Month of Ecosystem Security Engineering">
+    <meta property="og:description" content="A first-month update on the PHP Foundation&#039;s ecosystem security work">
+    <meta property="og:image" content="https://thephp.foundation/assets/share/2026-06-23-one-month-of-ecosystem-security-engineering.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="https://thephp.foundation">
+    <meta property="twitter:url" content="https://thephp.foundation/blog/2026/06/23/one-month-of-ecosystem-security-engineering/">
+    <meta name="twitter:title" content="One Month of Ecosystem Security Engineering">
+    <meta name="twitter:description" content="A first-month update on the PHP Foundation&#039;s ecosystem security work">
+    <meta name="twitter:image" content="https://thephp.foundation/assets/share/2026-06-23-one-month-of-ecosystem-security-engineering.png">
+
+    <link rel="apple-touch-startup-image" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="shortcut icon" sizes="76x76" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="shortcut icon" sizes="120x120" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="shortcut icon" sizes="128x128" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="shortcut icon" sizes="152x152" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="shortcut icon" sizes="196x196" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="shortcut icon" sizes="512x512" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="shortcut icon" sizes="1024x1024" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="shortcut icon" sizes="2048x2048" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="apple-touch-icon" sizes="128x128" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="apple-touch-icon" sizes="196x196" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="apple-touch-icon" sizes="512x512" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="apple-touch-icon" sizes="1024x1024" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="apple-touch-icon" sizes="2048x2048" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+
+    <link rel="alternate" type="application/atom+xml" href="https://thephp.foundation/atom.xml"
+          title="The PHP Foundation activity feed"/>
+                <script src="//cdn.jsdelivr.net/npm/anchor-js/anchor.min.js"></script>
+    </head>
+<body class="bg-white">
+
+<div role="region" aria-label="PHPverse 2025 announcement" class="w-full bg-green-500 text-white text-center py-1 text-sm font-medium z-50 hover:text-white hidden">
+    <a href="banner link stub" target="_blank" rel="noopener noreferrer" class="text-white no-underline hover:underline hover:text-white visited:hover:text-white">banner text stub</a>
+</div>
+
+<header x-data="{ isOpen: false }" @keydown.escape="isOpen = false" @click.away="isOpen = false" itemscope
+        itemtype="https://schema.org/WPHeader">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between relative">
+        <div class="absolute inset-x-0 bottom-0 h-px bg-slate-900/5"></div>
+        <div class="flex lg:flex-1 items-center gap-4">
+            <a href="https://thephp.foundation/" class="-m-1.5 p-1.5">
+                <img class="h-16 w-auto" src="https://thephp.foundation/assets/icons/php_foundation.svg"
+                     alt="PHP Foundation">
+            </a>
+            <span class="text-[#27282c] font-semibold text-sm md:text-xl" itemprop="headline">The PHP Foundation</span>
+        </div>
+        <div class="flex lg:hidden">
+            <button type="button"
+                    @click="isOpen = true"
+                    class="m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                     aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+                </svg>
+            </button>
+        </div>
+        <div class="hidden lg:flex lg:gap-x-12" itemscope itemtype="https://schema.org/SiteNavigationElement">
+            <a href="https://thephp.foundation/structure" class="text-gray-700 hover:underline" itemprop="url">Who we are</a>
+
+            <a href="https://thephp.foundation/foundation" class="text-gray-700 hover:underline" itemprop="url">What we do</a>
+
+            <a href="https://thephp.foundation/blog" class="text-gray-700 hover:underline" itemprop="url">News</a>
+
+            <a href="https://thephp.foundation/presentations" class="text-gray-700 hover:underline" itemprop="url">Talks</a>
+
+            <a href="https://thephp.foundation/contact" class="text-gray-700 hover:underline" itemprop="url">Contact</a>
+        </div>
+        <div class="hidden lg:flex lg:flex-1 lg:justify-end items-center gap-8">
+            <a href="https://php.net" target="_blank" rel="noopener noreferrer"
+               class="text-sm font-semibold leading-6 text-gray-700 nav-org hover:border-none hover:underline">
+                php.net</a>
+
+            <a href="/sponsor" class="button-link">Sponsor</a>
+        </div>
+    </nav>
+    <div x-show="isOpen" x-cloak>
+        <div class="fixed inset-0 z-50"></div>
+        <div class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+            <div class="mx-auto flex max-w-7xl items-center justify-between relative">
+                <div class="flex lg:flex-1 items-center gap-4">
+                    <a href="https://thephp.foundation/" class="-m-1.5 p-1.5">
+                        <img class="h-16 w-auto" src="https://thephp.foundation/assets/icons/php_foundation.svg"
+                             alt="PHP Foundation">
+                    </a>
+                    <span class="text-[#27282c] font-semibold text-sm md:text-xl">The PHP Foundation</span>
+                </div>
+                <div class="flex">
+                    <button type="button"
+                            @click="isOpen = false"
+                            class="m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                             aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <nav class="mt-6 flow-root px-6 py-6">
+                <div class="-my-6 divide-y divide-gray-500/10">
+                    <div class="space-y-2 py-6" itemscope itemtype="https://schema.org/SiteNavigationElement">
+                        <a href="https://thephp.foundation/structure" itemprop="url"
+                           class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 no-underline">Who
+                            we are</a>
+
+                        <a href="https://thephp.foundation/foundation" itemprop="url"
+                           class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 no-underline">What
+                            we do</a>
+
+                        <a href="https://thephp.foundation/blog" itemprop="url"
+                           class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 no-underline">News</a>
+
+                        <a href="https://thephp.foundation/presentations" itemprop="url"
+                           class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 no-underline">Talks</a>
+
+                        <a href="https://thephp.foundation/contact" itemprop="url"
+                           class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 no-underline">Contact</a>
+                    </div>
+                    <div class="py-6">
+                        <a href="/sponsor" rel="noopener noreferrer"
+                           class="block py-2 text-center no-underline px-6 !text-white bg-[#7f52ff] rounded-3xl hover:bg-[rgba(127,82,255,.8)]">Sponsor</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="bg-white px-6 lg:px-8 my-16" itemscope itemtype="https://schema.org/Article">
+    <div class="mx-auto max-w-3xl text-base leading-7 text-gray-700">
+        <h1 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl" itemprop="name">One Month of Ecosystem Security Engineering</h1>
+
+        <div class="flex flex-col md:flex-row md:items-center gap-x-4 text-xs mt-2">
+            Published on <span itemprop="datePublished">Jun 23, 2026</span>
+            <div>
+                                
+                                <span itemprop="publisher" itemscope itemtype="https://schema.org/Person"><a
+                        href="https://de.linkedin.com/in/volker-dusch" itemprop="url" class="no-underline" target="_blank"
+                        rel="noopener noreferrer"><span itemprop="name">Volker Dusch</span></a></span>                                            </div>
+        
+                <div class="flex gap-x-2 mt-2 md:mt-0">
+                        <a href="https://thephp.foundation/blog/tag/security"
+               class="rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100 no-underline">
+                Security
+            </a>
+                        <a href="https://thephp.foundation/blog/tag/SIGs"
+               class="rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100 no-underline">
+                Sigs
+            </a>
+                    </div>
+                </div>
+
+        <div class="mt-6 text-xl leading-8" itemprop="text">
+            <p>Last month I shared with you that the PHP Foundation secured a <a href="https://thephp.foundation/blog/2026/05/18/announcing-ecosystem-security-team/">grant by Alpha-Omega through the Linux Foundation</a> to help improve the security of the PHP open source ecosystem, and that it is forming a new Ecosystem Security Team. Today I want to update you on the progress so far.</p>
+
+<p>After a brief set-up period, I jumped into three main activities:</p>
+
+<ul>
+<li>assessing PHP community members' most pressing needs</li>
+<li>assembling a team of volunteers to help</li>
+<li>applying the resources granted to scan PHP ecosystem projects</li>
+</ul>
+
+<p>Setup included getting started with building collaborative toolchains, ensuring access to scanning budgets and models, defining our metrics for reporting, and identifying effective ways to distribute security vulnerability findings and to support maintainers.</p>
+
+<p>So far we talked to 35 project maintainers about our project scanning efforts and the security concerns they have. We shared hundreds of potential security vulnerability findings, leading to nearly a hundred publicly available fixes across the ecosystem already, and many great and useful conversations.</p>
+
+<p>Additionally there were mass fixes of the same finding across many repositories. For example, in one case, we had around 200 repositories apply the same fix to their GitHub Actions as they are managed via a central template. I didn’t want to inflate the numbers so these instances are counted as a single fix.</p>
+
+<p>In total, we scanned and rescanned over 300 of the most downloaded Composer packages and nearly all big frameworks. We got in touch with the respective maintainers or found people to jump in and help address security vulnerabilities where that was needed.</p>
+
+<p>I want to extend a personal thank you to <a href="https://github.com/grahamcampbell">Graham Campbell</a>, who has been very helpful in getting me started with ideas and initial issue validation in the first couple of days of my new role and who has continued to be responsive and helpful with solving issues in other projects.</p>
+
+<h2 id="current-efforts">Current efforts</h2>
+
+<p>Project scanning for security vulnerabilities continues at a steady pace to make the most use of the resources we've been provided with. We do not only search for vulnerabilities, but also help triage, reproduce issues, help with impact analysis, and where necessary supply fixes by using our access to AI models and their extended “Cyber” capabilities.</p>
+
+<p>I will continue to talk to everyone who approaches me while providing a steady flow of public-facing communication about our efforts.</p>
+
+<p>All maintainers who approached me so far were kind enough to offer to validate the generated findings themselves. I was able to focus primarily on generating reproducers and letting the experts figure out whether a particular finding represents a security issue, a bugfix, or an invalid report. The maintainers in these cases were handling their own reporting and disclosure on their own terms and in a way that fits their timeline.</p>
+
+<p>I’m personally delighted by the great community response, both quantitatively and qualitatively: Nearly everyone has been supportive and I encountered only one negative maintainer interaction and one person we are still looking to get in touch with. I couldn’t be happier with the maturity, readiness and friendliness of the wider community. I didn’t expect anything else from PHP, but it’s great to be proven right.</p>
+
+<h3 id="shared-tooling%3A-scrutineer">Shared tooling: Scrutineer</h3>
+
+<p>When scanning many projects, we face challenges: Getting reproducible and reliable outputs, avoiding false positives, and using our resources effectively without duplicating work, all while allowing each person scanning to run multiple agents in parallel without human interaction during the initial scanning process. Security analysis needs to be performed in isolated containerized environments that keep the infrastructure we use for scanning secure.</p>
+
+<p>To pool our efforts, we are working with the Ecosystem Security Engineers from other languages and the Team at Alpha-Omega on shared tooling for this purpose. Specifically we're collaborating on <a href="https://github.com/alpha-omega-security/scrutineer">Scrutineer</a>. I want to give a special shout out to <a href="https://github.com/alexandre-daubois">Alexandre Daubois</a> from <a href="https://les-tilleuls.coop">Les-Tilleuls.coop</a>. His contributions to Scrutineer have been very valuable in enabling more people to effectively scan PHP projects.</p>
+
+<p>Scrutineer enables more structured results and an easier reporting process. It also helps to let people with access to different, otherwise unavailable, AI models, or with access to more resource capacity, scan projects on our behalf. Using Scrutineer we can tailor the containers used for analysis towards the PHP ecosystem to improve the quality of scanning results through tooling to create and validate reproducers. The report quality would be drastically lower and require more clean-up work without effective automated feedback loops.</p>
+
+<h3 id="helping-projects-with-individual-approaches">Helping projects with individual approaches</h3>
+
+<p>We help projects and maintainers digest reports, create reproducers, deduplicate security vulnerability findings, and suggest and validate fixes.</p>
+
+<p>When I accepted my new role, I was unsure how many projects would reach out for help with these tasks. I've received feedback that the quality of reports maintainers are receiving has gone up significantly in the last couple of months. So I've not received many requests to assist with processing reports and proposed fixes. Many maintainers report that they use their own coding agents to validate and reproduce received security vulnerability findings effectively. But for some more complex issues, currently available AI models cannot help or refuse to help with working on an exploit for a potential vulnerability. In these cases, I can be of help.</p>
+
+<p>Sometimes, the automated scanning doesn’t produce clear results or the threat modeling or attack vectors are not clear enough. In these cases, I spend time with each project to better understand what the AI models should be assessing and steer them in that direction.</p>
+
+<p>A special mention here is the PHP project itself: Many people like to try their new security tools on PHP, due to its popularity. The inherent complexity of a programming language runtime results in significantly lower quality results from agentic security approaches. The reports the PHP project receives are harder to digest than they are in userland PHP libraries with a clearer threat model and attack surface.</p>
+
+<p>I was not yet able to help PHP itself much so far, due to time constraints. I intend to work on core PHP a lot more in the coming months. The communication with the PHP core developer team is great and I’m eager to get properly started and see where I can help them.</p>
+
+<h3 id="assembling-a-team">Assembling a team</h3>
+
+<p>I was delighted to see that the PHP Foundation is launching <a href="https://thephp.foundation/blog/2026/06/11/integrating-community-feedback-into-foundation-strategy-part2/#community-special-interest-groups">Community Special Interest Groups</a>. One of them is the Ecosystem Security Team, which the PHP Foundation wishes to sustain far beyond the 6 months of the initial grant funding, so I've begun to assemble a team around these security and maintainer support efforts.</p>
+
+<p>If you want to reach out and talk with like-minded people about security, you can find a couple of us in the #ecosystem-security channel on the <a href="https://discord.com/invite/RYajXKxuuK">phpc Discord</a>. The <a href="https://phpcommunity.org">PHP Community Foundation</a> was kind enough to create a channel for us and #the-php-foundation in general. I’m “@edorian” on there, if you want to say hi.</p>
+
+<p>For sensitive topics, you can always <a href="https://thephp.foundation/blog/2026/05/18/announcing-ecosystem-security-team/#:~:text=Get%20in%20touch%20via%20email%3A%20volker%40thephp.foundation.">get in touch</a> with me directly.</p>
+
+<p>Next to Alexandre, who I already mentioned above, a name I’ve come across a lot when talking to maintainers was <a href="https://github.com/iliaal">Ilia Alshanetsky</a>. Ilia has been doing a lot of independent work and I asked him to join the Ecosystem Security Team so we can better coordinate our efforts.</p>
+
+<h2 id="looking-ahead">Looking ahead</h2>
+
+<p>The goals I set myself for the next month are:</p>
+
+<ul>
+<li>Scan another 250 projects and report all collected findings</li>
+<li>Perform a dedicated, deeper analysis of core projects and libraries</li>
+<li>Spend more time helping out with php-src and PHP Extensions issues</li>
+</ul>
+
+<p>I will continue to be available to help any project maintainers who reach out.</p>
+
+<h3 id="get-in-touch">Get in touch</h3>
+
+<p>To repeat what was already mentioned above: We have capacity to scan and help more maintainers.</p>
+
+<p>Discord: <a href="https://discord.com/channels/356354025865740288/1507370983013744681">#ecosystem-security</a> on the #phpc community server <a href="https://discord.com/invite/RYajXKxuuK">(Invite)</a></p>
+
+<p>Email: <a href="&#x6d;&#97;&#x69;&#108;&#x74;&#x6f;&#58;&#x76;&#111;&#x6c;&#x6b;&#101;&#x72;&#64;&#x74;&#x68;&#101;&#x70;&#104;&#x70;&#x2e;&#102;&#x6f;&#117;&#x6e;&#x64;&#97;&#x74;&#105;&#x6f;&#x6e;">volker@thephp.foundation</a></p>
+
+        </div>
+
+        <ul role="list" class="border-t pt-5 my-5 divide-y divide-gray-200 xl:col-span-3">
+                                                <li class="flex flex-col gap-10 py-12 first:pt-0 last:pb-0 sm:flex-row">
+                <img src="https://avatars.githubusercontent.com/u/247397?s=200&amp;v=4" alt="Volker Dusch"
+                     class="w-16 h-16 rounded-full lg:w-20 lg:h-20"/>
+                <div class="max-w-xl flex-auto leading-6 space-y-1">
+                    <div class="text-lg/8 font-semibold tracking-tight text-gray-900">Volker Dusch</div>
+                                        <div class="text-base/7 text-[#7f52ff]">Ecosystem AI Security Engineer in Residence</div>
+                                        <ul class="flex space-x-4 list-none p-0 m-0">
+                        
+                                                <li>
+                            <a href="https://phpc.social/@edorian"
+                               class="text-gray-400 hover:text-gray-500" rel="noreferrer noopener"
+                               target="_blank" itemprop="url">
+                                <span class="sr-only">Mastodon</span>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z"/>
+                                </svg>
+                            </a>
+                        </li>
+                        
+                        
+                                                <li>
+                            <a href="https://github.com/edorian"
+                               class="text-gray-400 hover:text-gray-500" rel="noreferrer noopener"
+                               target="_blank" itemprop="url">
+                                <span class="sr-only">GitHub</span>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 16 16"
+                                     aria-hidden="true">
+                                    <path d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z"></path>
+                                </svg>
+                            </a>
+                        </li>
+                                            </ul>
+                </div>
+            </li>
+                                </ul>
+
+        <div class="border-t pt-5 my-5">
+            <div
+    class="thread-container"
+    data-reddit-thread=""
+    data-reddit-search="PHP"
+    data-reddit-suggest-title="One Month of Ecosystem Security Engineering"
+    data-reddit-max-depth="10"
+    data-reddit-show-content="false"
+    data-reddit-show-controls="true"
+></div>
+<script>window.REDDITIFY_PROXY_URL = 'https://redditify-proxy.root-8f3.workers.dev';</script>
+<link rel="stylesheet" href="https://unpkg.com/redditify/dist/redditify.css">
+<script src="https://unpkg.com/redditify/dist/redditify.min.js"></script>
+
+        </div>
+
+        <div class="border-t pt-5 my-5">
+                        <nav class="flex flex-row justify-between article -mx-2 mb-5">
+                                <a href="https://thephp.foundation/blog/2026/06/19/the-php-ambassador-program-is-open/"
+                   class="flex flex-col w-1/2 border p-2 mx-2 rounded hover:border-[#7f52ff] transition-all no-underline">
+                    <div class="mb-1 text-sm text-gray-600 font-medium">Previous</div>
+                    <div class="font-bold text-blue-500">The PHP Ambassador Program is Open</div>
+                </a>
+                
+                                <a href="https://thephp.foundation/blog/2026/06/26/maintaining-php-build-infrastructure-for-windows-tooling-for-builds-and-security-updates/"
+                   class="flex flex-col w-1/2 border p-2 mx-2 rounded hover:border-[rgba(127,82,255,.8)] transition-all no-underline">
+                    <div class="mb-1 text-sm text-gray-600 font-medium">Next</div>
+                    <div class="font-bold text-blue-500">Maintaining PHP Build infrastructure for Windows: Tooling for builds and security updates</div>
+                </a>
+                            </nav>
+            
+            <div>
+                <a href="https://github.com/ThePHPF/thephp.foundation/edit/main/source/_posts/2026-06-23-one-month-of-ecosystem-security-engineering.md"
+                   class="nav-org" rel="noopener noreferrer" target="_blank">Edit this page on GitHub</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-gray-900">
+    <div class="mx-auto max-w-7xl overflow-hidden px-6 py-12 lg:px-8">
+        <ul class="list-none grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-1 max-w-xl mx-auto text-sm leading-6 text-gray-400" >
+            <li><a href="/sponsor"          class="text-gray-400 hover:text-gray-100 no-underline">Sponsor</a></li>
+            <li><a href="/structure"        class="text-gray-400 hover:text-gray-100 no-underline">Structure</a></li>
+            <li><a href="/structure#admins" class="text-gray-400 hover:text-gray-100 no-underline">Board</a></li>
+            <li><a href="/structure#core_developers"        class="text-gray-400 hover:text-gray-100 no-underline">Developers</a></li>
+            <li><a href="/blog"             class="text-gray-400 hover:text-gray-100 no-underline">News</a></li>
+            <li><a href="/presentations"    class="text-gray-400 hover:text-gray-100 no-underline">Talks</a></li>
+            <li><a href="/branding"         class="text-gray-400 hover:text-gray-100 no-underline">Brand Guide</a></li>
+            <li><a href="/governance"       class="text-gray-400 hover:text-gray-100 no-underline">Governance</a></li>
+            <li><a href="/code-of-conduct"  class="text-gray-400 hover:text-gray-100 no-underline">Code of Conduct</a></li>
+            <li><a href="/contact"          class="text-gray-400 hover:text-gray-100 no-underline">Contact</a></li>
+        </ul>
+
+        <div class="mt-10 flex justify-center space-x-10 items-center">
+            <a href="https://twitter.com/thephpf" target="_blank" rel="noopener noreferrer"
+               class="text-gray-400 hover:text-gray-500">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                    <g>
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                    </g>
+                </svg>
+            </a>
+
+            <a href="https://github.com/ThePHPF/thephp.foundation" class="text-gray-400 hover:text-gray-500"
+               target="_blank" rel="noopener noreferrer">
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                          clip-rule="evenodd"/>
+                </svg>
+            </a>
+
+            <a href="https://phpc.social/@thephpf" class="text-gray-400 hover:text-gray-500" target="_blank"
+               rel="noopener noreferrer">
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z"/>
+                </svg>
+            </a>
+
+            <a href="https://www.linkedin.com/company/phpfoundation/" class="text-gray-400 hover:text-gray-500"
+               target="_blank" rel="noopener noreferrer">
+                <svg class="h-6 w-6"
+                     viewBox="0 0 56.693 56.693" fill="currentColor"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                        <path d="M30.071,27.101v-0.077c-0.016,0.026-0.033,0.052-0.05,0.077H30.071z"/>
+                        <path
+                                d="M49.265,4.667H7.145c-2.016,0-3.651,1.596-3.651,3.563v42.613c0,1.966,1.635,3.562,3.651,3.562h42.12   c2.019,0,3.654-1.597,3.654-3.562V8.23C52.919,6.262,51.283,4.667,49.265,4.667z M18.475,46.304h-7.465V23.845h7.465V46.304z    M14.743,20.777h-0.05c-2.504,0-4.124-1.725-4.124-3.88c0-2.203,1.67-3.88,4.223-3.88c2.554,0,4.125,1.677,4.175,3.88   C18.967,19.052,17.345,20.777,14.743,20.777z M45.394,46.304h-7.465V34.286c0-3.018-1.08-5.078-3.781-5.078   c-2.062,0-3.29,1.389-3.831,2.731c-0.197,0.479-0.245,1.149-0.245,1.821v12.543h-7.465c0,0,0.098-20.354,0-22.459h7.465v3.179   c0.992-1.53,2.766-3.709,6.729-3.709c4.911,0,8.594,3.211,8.594,10.11V46.304z"/>
+                    </g>
+                </svg>
+            </a>
+        </div>
+        <div class="mt-10 text-center text-xs leading-5 text-gray-500" itemprop="copyrightHolder">&copy; The PHP Foundation</div>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const anchors = new AnchorJS()
+        anchors.add()
+
+        for (const element of document.getElementsByClassName('anchorjs-link')) {
+            element.addEventListener('click', function () {
+                navigator.clipboard.writeText(window.location.origin + window.location.pathname + element.getAttribute('href'))
+            })
+        }
+    })
+</script>
+
+
+<script>hljs.highlightAll();</script>
+
+<script src="https://cdn.usefathom.com/script.js" data-site="PJKRZUTE" defer></script>
+<!-- Matomo -->
+<script>
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+        var u="https://analytics.thephp.foundation/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+</script>
+<noscript><p><img referrerpolicy="no-referrer-when-downgrade" src="https://analytics.thephp.foundation/matomo.php?idsite=1&amp;rec=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Matomo Code -->
+
+</body>
+</html>

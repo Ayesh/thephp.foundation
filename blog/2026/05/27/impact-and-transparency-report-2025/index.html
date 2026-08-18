@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>The PHP Foundation Impact and Transparency Report 2025 &mdash; The PHP Foundation &mdash; Supporting, Advancing, and Developing the PHP Language</title>
+    <meta name="description" content="The PHP Foundation &mdash; Supporting, Advancing, and Developing the PHP Language">
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="index, follow">
+        <link href="https://phpc.social/@thephpf" rel="me" />
+    <link rel="stylesheet" href="https://thephp.foundation/assets/css/app.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.6.0/styles/base16/danqing.min.css">
+    <script src="//unpkg.com/@highlightjs/cdn-assets@11.6.0/highlight.min.js"></script>
+
+    <meta name="yandex-verification" content="6990192232fdf071" />
+    <meta name="msvalidate.01" content="5D1EB82347E6BF271A01DCDBF7E59BED" />
+
+    <meta property="og:url" content="https://thephp.foundation/blog/2026/05/27/impact-and-transparency-report-2025/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="The PHP Foundation Impact and Transparency Report 2025">
+    <meta property="og:description" content="The PHP Foundation &mdash; Supporting, Advancing, and Developing the PHP Language">
+    <meta property="og:image" content="https://thephp.foundation/assets/share/2026-05-27-impact-and-transparency-report-2025.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="https://thephp.foundation">
+    <meta property="twitter:url" content="https://thephp.foundation/blog/2026/05/27/impact-and-transparency-report-2025/">
+    <meta name="twitter:title" content="The PHP Foundation Impact and Transparency Report 2025">
+    <meta name="twitter:description" content="The PHP Foundation &mdash; Supporting, Advancing, and Developing the PHP Language">
+    <meta name="twitter:image" content="https://thephp.foundation/assets/share/2026-05-27-impact-and-transparency-report-2025.png">
+
+    <link rel="apple-touch-startup-image" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="shortcut icon" sizes="76x76" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="shortcut icon" sizes="120x120" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="shortcut icon" sizes="128x128" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="shortcut icon" sizes="152x152" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="shortcut icon" sizes="196x196" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="shortcut icon" sizes="512x512" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="shortcut icon" sizes="1024x1024" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="shortcut icon" sizes="2048x2048" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="apple-touch-icon" sizes="128x128" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="apple-touch-icon" sizes="196x196" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="apple-touch-icon" sizes="512x512" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="apple-touch-icon" sizes="1024x1024" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+    <link rel="apple-touch-icon" sizes="2048x2048" href="https://thephp.foundation/assets/icons/php_foundation.svg">
+
+    <link rel="alternate" type="application/atom+xml" href="https://thephp.foundation/atom.xml"
+          title="The PHP Foundation activity feed"/>
+                <script src="//cdn.jsdelivr.net/npm/anchor-js/anchor.min.js"></script>
+    </head>
+<body class="bg-white">
+
+<div role="region" aria-label="PHPverse 2025 announcement" class="w-full bg-green-500 text-white text-center py-1 text-sm font-medium z-50 hover:text-white hidden">
+    <a href="banner link stub" target="_blank" rel="noopener noreferrer" class="text-white no-underline hover:underline hover:text-white visited:hover:text-white">banner text stub</a>
+</div>
+
+<header x-data="{ isOpen: false }" @keydown.escape="isOpen = false" @click.away="isOpen = false" itemscope
+        itemtype="https://schema.org/WPHeader">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between relative">
+        <div class="absolute inset-x-0 bottom-0 h-px bg-slate-900/5"></div>
+        <div class="flex lg:flex-1 items-center gap-4">
+            <a href="https://thephp.foundation/" class="-m-1.5 p-1.5">
+                <img class="h-16 w-auto" src="https://thephp.foundation/assets/icons/php_foundation.svg"
+                     alt="PHP Foundation">
+            </a>
+            <span class="text-[#27282c] font-semibold text-sm md:text-xl" itemprop="headline">The PHP Foundation</span>
+        </div>
+        <div class="flex lg:hidden">
+            <button type="button"
+                    @click="isOpen = true"
+                    class="m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                     aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+                </svg>
+            </button>
+        </div>
+        <div class="hidden lg:flex lg:gap-x-12" itemscope itemtype="https://schema.org/SiteNavigationElement">
+            <a href="https://thephp.foundation/structure" class="text-gray-700 hover:underline" itemprop="url">Who we are</a>
+
+            <a href="https://thephp.foundation/foundation" class="text-gray-700 hover:underline" itemprop="url">What we do</a>
+
+            <a href="https://thephp.foundation/blog" class="text-gray-700 hover:underline" itemprop="url">News</a>
+
+            <a href="https://thephp.foundation/presentations" class="text-gray-700 hover:underline" itemprop="url">Talks</a>
+
+            <a href="https://thephp.foundation/contact" class="text-gray-700 hover:underline" itemprop="url">Contact</a>
+        </div>
+        <div class="hidden lg:flex lg:flex-1 lg:justify-end items-center gap-8">
+            <a href="https://php.net" target="_blank" rel="noopener noreferrer"
+               class="text-sm font-semibold leading-6 text-gray-700 nav-org hover:border-none hover:underline">
+                php.net</a>
+
+            <a href="/sponsor" class="button-link">Sponsor</a>
+        </div>
+    </nav>
+    <div x-show="isOpen" x-cloak>
+        <div class="fixed inset-0 z-50"></div>
+        <div class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+            <div class="mx-auto flex max-w-7xl items-center justify-between relative">
+                <div class="flex lg:flex-1 items-center gap-4">
+                    <a href="https://thephp.foundation/" class="-m-1.5 p-1.5">
+                        <img class="h-16 w-auto" src="https://thephp.foundation/assets/icons/php_foundation.svg"
+                             alt="PHP Foundation">
+                    </a>
+                    <span class="text-[#27282c] font-semibold text-sm md:text-xl">The PHP Foundation</span>
+                </div>
+                <div class="flex">
+                    <button type="button"
+                            @click="isOpen = false"
+                            class="m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                             aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <nav class="mt-6 flow-root px-6 py-6">
+                <div class="-my-6 divide-y divide-gray-500/10">
+                    <div class="space-y-2 py-6" itemscope itemtype="https://schema.org/SiteNavigationElement">
+                        <a href="https://thephp.foundation/structure" itemprop="url"
+                           class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 no-underline">Who
+                            we are</a>
+
+                        <a href="https://thephp.foundation/foundation" itemprop="url"
+                           class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 no-underline">What
+                            we do</a>
+
+                        <a href="https://thephp.foundation/blog" itemprop="url"
+                           class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 no-underline">News</a>
+
+                        <a href="https://thephp.foundation/presentations" itemprop="url"
+                           class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 no-underline">Talks</a>
+
+                        <a href="https://thephp.foundation/contact" itemprop="url"
+                           class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 no-underline">Contact</a>
+                    </div>
+                    <div class="py-6">
+                        <a href="/sponsor" rel="noopener noreferrer"
+                           class="block py-2 text-center no-underline px-6 !text-white bg-[#7f52ff] rounded-3xl hover:bg-[rgba(127,82,255,.8)]">Sponsor</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="bg-white px-6 lg:px-8 my-16" itemscope itemtype="https://schema.org/Article">
+    <div class="mx-auto max-w-3xl text-base leading-7 text-gray-700">
+        <h1 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl" itemprop="name">The PHP Foundation Impact and Transparency Report 2025</h1>
+
+        <div class="flex flex-col md:flex-row md:items-center gap-x-4 text-xs mt-2">
+            Published on <span itemprop="datePublished">May 27, 2026</span>
+            <div>
+                                
+                                <span itemprop="publisher" itemscope itemtype="https://schema.org/Person"><a
+                        href="https://www.linkedin.com/in/elizabethn/" itemprop="url" class="no-underline" target="_blank"
+                        rel="noopener noreferrer"><span itemprop="name">Elizabeth Barron</span></a></span>                                            </div>
+        
+                <div class="flex gap-x-2 mt-2 md:mt-0">
+                        <a href="https://thephp.foundation/blog/tag/report"
+               class="rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100 no-underline">
+                Report
+            </a>
+                    </div>
+                </div>
+
+        <div class="mt-6 text-xl leading-8" itemprop="text">
+            <h2 id="executive-summary">Executive Summary</h2>
+
+<p>PHP turned 30 in 2025. With The PHP Foundation's support, the PHP project marked the year by shipping PHP 8.5. The PHP Foundation also launched PIE 1.0, initiated a project to modernize PHP's stream layer, and authored roughly 42% of all commits to PHP's core. This work was supported by 536 sponsors and individual contributors, and it could not have happened without them.</p>
+
+<p>At the end of 2025, The PHP Foundation consisted of 8 volunteer board members, an Executive Director sponsored by <a href="https://www.jetbrains.com/">JetBrains</a>, and 11 contracted developers who worked part- and full-time to strengthen and improve the core PHP language through bug and security fixes, feature development, and contributing to the RFC process through discussion and development of new RFCs.</p>
+
+<p>The total contributions received from sponsors and individual donors was $730,534, which enabled The PHP Foundation to advance its mission in a meaningful way.</p>
+
+<h3 id="about-the-php-foundation">About the PHP Foundation</h3>
+
+<p>The PHP Foundation's main focus is to ensure the sustainability and long term viability of the PHP language. Our priorities continue to be:</p>
+
+<ul>
+<li>Improving the language for users</li>
+<li>Providing high-quality maintenance</li>
+<li>Improving the project to retain current contributors and integrate new ones</li>
+<li>Promoting the public image of PHP</li>
+</ul>
+
+<p>It should be noted that The PHP Foundation does not control the decisions made by the PHP community regarding the language, nor does it assume any governance over the language itself. PHP has always been, and will continue to be a community-owned Open Source project.</p>
+
+<h2 id="what-we-shipped-in-2025">What we shipped in 2025</h2>
+
+<p>Leadership at The PHP Foundation coordinated several high-level initiatives, including:</p>
+
+<ul>
+<li>The completion of a <a href="https://thephp.foundation/blog/2025/04/10/php-core-security-audit-results/">Security Audit</a> by <a href="https://ostif.org/">Open Source Technology Improvement Fund (OSTIF)</a>, funded by the <a href="https://www.sovereign.tech/">Sovereign Tech Agency</a> through the Sovereign Tech Fund (STF), and sustained security advisory work across the team</li>
+<li>The <a href="https://thephp.foundation/blog/2025/05/15/frankenphp/">addition of FrankenPHP</a> to the PHP GitHub organization, in collaboration with <a href="https://les-tilleuls.coop/en/">Les-Tilleuls.coop</a></li>
+<li>The development of the <a href="https://thephp.foundation/blog/2025/09/05/php-mcp-sdk/">official PHP SDK for MCP</a>, in collaboration with the <a href="https://symfony.com/">Symfony</a> Team and <a href="https://www.anthropic.com/">Anthropic</a></li>
+</ul>
+
+<p>In addition, in 2025, eleven Foundation-funded contractors collectively logged thousands of hours advancing PHP's language, runtime, security posture, ecosystem tooling, and community reach.</p>
+
+<p>Key achievements included:</p>
+
+<ul>
+<li>Successful delivery of PHP 8.5</li>
+<li>Launch of PIE 1.0 and initiation of the formal PECL deprecation process</li>
+<li>Launch of the STF Streams modernization project</li>
+<li>PHP Foundation representation at the <a href="https://orcwg.org/">Open Regulatory Compliance Working Group</a> on the EU Cyber Resilience Act</li>
+</ul>
+
+<h2 id="the-php-foundation-staff">The PHP Foundation Staff</h2>
+
+<p>Our 2025 team was stable and productive, and worked very well together. We ended 2025 by adding one more contractor to the team in H2: <a href="https://thephp.foundation/blog/2025/09/25/joe-watkins/">Joe Watkins</a>.</p>
+
+<p>Therefore, as of January 1, 2026, 11 Foundation developers work on PHP:</p>
+
+<ul>
+<li>Arnaud Le Blanc <a href="https://github.com/arnaud-lb">@arnaud-lb</a></li>
+<li>David Carlier <a href="https://github.com/devnexen">@devnexen</a></li>
+<li>Derick Rethans <a href="https://github.com/derickr">@derickr</a></li>
+<li>Gina P. Banyard <a href="https://github.com/Girgias">@Girgias</a></li>
+<li>Ilija Tovilo <a href="https://github.com/iluuu1994">@iluuu1994</a></li>
+<li>Jakub Zelenka <a href="https://github.com/bukka">@bukka</a></li>
+<li>James Titcumb <a href="https://github.com/asgrim">@asgrim</a></li>
+<li>Joe Watkins <a href="https://github.com/krakjoe">@krakjoe</a></li>
+<li>Máté Kocsis <a href="https://github.com/kocsismate">@kocsismate</a></li>
+<li>Saki Takamachi <a href="https://github.com/SakiTakamachi">@SakiTakamachi</a></li>
+<li>Shivam Mathur <a href="https://github.com/shivammathur">@shivammathur</a></li>
+</ul>
+
+<h3 id="team-achievements">Team Achievements</h3>
+
+<p><img src="/assets/post-images/2026/impact-report-2025/php_foundation_stats_2025.png" width="1052" alt="PHP Foundation 2025 contribution statistics infographic showing key metrics: Foundation developers contributed 2,929 commits and 662 merged PRs across 9 PHP repositories; 1,685 community PRs reviewed in php-src; Foundation developers authored 42% of commits, 32% of merged PRs, and 25% of bug-fix PRs in php-src; Foundation leads 90%+ of activity in php/pie, php/php-windows-builder, and php/web-downloads; 14 PIE releases shipped including version 1.0; team delivered 40+ international conference talks throughout 2025. The infographic presents these accomplishments in an organized, visually hierarchical layout highlighting The PHP Foundation team's productive year." class="mb-4 sm:mr-4"/></p>
+
+<p>We acknowledge the limitations in providing any metrics; very rarely do metrics accurately represent the full scenario (for instance, a 1-line commit and a 100-line commit are counted equally in the overall number of commits). Additionally, some metrics are more difficult to capture than others. Therefore, we offer this set of obtainable metrics to collectively demonstrate the team's impact. To clarify the data points above:</p>
+
+<ul>
+<li>PRs merged = PRs that were authored by a contractor that were merged by anyone</li>
+<li>Community PR Reviews = PRs from other people that were reviewed/commented on by contractors</li>
+<li>% of Bug Fixes = the percent of all bug fix PRs that were authored by a contractor but merged by anyone in the community. PRs were considered “fixes” if they included the words “fix,” “resolve,” or “bug” in the title of the PR</li>
+</ul>
+
+<h4 id="language-%26-runtime">Language &amp; runtime</h4>
+
+<ul>
+<li><strong>URL/URI parsing RFC</strong> (Máté Kocsis) passed in May, representing PHP's most significant standard-library addition in years, including upstream contributions to the uriparser C library.</li>
+<li><strong>Gina P. Banyard</strong> drove the entire PHP 8.5 deprecations and warnings RFC to php-src and authored 173 merged PRs (roughly 16% of all merged PRs to php-src in 2025).</li>
+<li><strong>Arnaud Le Blanc's</strong> Tail Call VM technique merged in August, removing PHP's dependency on a single compiler for peak performance; he also co-developed Partial Function Applications v2 and Context Managers with Larry Garfield.</li>
+<li><strong>Ilija Tovilo</strong> was the team's leading committer to php-src (565 commits) and advanced the Pattern Matching RFC alongside deep performance work on zend_op size and TMP|VAR consolidation.</li>
+<li><strong>Saki Takamachi</strong> delivered BCMath optimizations and created xsse, a portable SIMD abstraction library already in use in php-src.</li>
+<li><strong>Jakub Zelenka</strong> progressed with implementation of JsonSchema support for the JSON extension.</li>
+</ul>
+
+<h4 id="security">Security</h4>
+
+<p>Jakub Zelenka led sustained multi-month investigations on multiple security advisories, which included the handling of PHP security releases. Jakub also represented the PHP Foundation in the Open Regulatory Compliance Working Group shaping EU Cyber Resilience Act compliance.  David Carlier delivered a steady stream of overflow, double-free, and memory leak fixes across GD, ZIP, intl, PDO_SQLite, sodium, and Fiber, upstreaming several directly to libgd. Shivam Mathur is responsible for security upgrades to Windows PHP builds addressing 50+ CVEs/security issues, and continues to support builds for 100+ extensions for Windows. Derick Rethans patched an XSS in php.net and ran an emergency CVE response for the rsync server.</p>
+
+<h4 id="streams-modernization-sovereign-tech-fund">Streams modernization (Sovereign Tech Fund)</h4>
+
+<p>The STF underwrote a 530-hour modernization of PHP's stream layer, delivering a new Polling API, TLS 1.3 improvements with session resumption (PSK, tickets, early data), redesigned stream error handling, an io_uring/IOCP abstraction, modernized copy infrastructure (copy_file_range, splice, sendfile), filter seeking improvements, and socket option enhancements. This is an ongoing project and will see more progress in 2026.</p>
+
+<h4 id="ecosystem-%26-infrastructure">Ecosystem &amp; infrastructure</h4>
+
+<p>The PHP Foundation has demonstrated meaningful contributions in several areas:</p>
+
+<ul>
+<li><strong>PIE (the new PHP extension installer)</strong>: James Titcumb authored 482 of 537 commits to php/pie (roughly 90% of the codebase)  and 109 of 156 merged PRs. He shipped 14 PIE releases including 1.0 in June, formally initiated PECL's deprecation, and delivered five conference talks evangelizing the project.</li>
+<li><strong>Windows infrastructure</strong>: Shivam Mathur authored 95% of commits to php/php-windows-builder and 98% of commits to php/web-downloads. Without his work, PHP would have no Windows distribution maintainer.</li>
+<li><strong>French documentation</strong>: 38% of commits and 47% of merged PRs to php/doc-fr in 2025 came from David Carlier, a community-facing impact that is often invisible in English-language reporting but reaches Francophone PHP developers worldwide.</li>
+<li><strong>Infrastructure:</strong> Derick Rethans migrated nearly every php.net property (wiki, downloads, qa, pecl, bugs, docs, www, and more) to modern Ansible-managed infrastructure, expanded WebAssembly support for interactive examples in the manual, and contributed alongside Shivam and Roman on the redesigned downloads page. Máté Kocsis and Ilija built statistical benchmarking infrastructure (Welch T-Test, Wilcoxon, Valgrind, variance reduction) underpinning the team's performance work.</li>
+</ul>
+
+<h4 id="strategic-r%26d">Strategic R&amp;D</h4>
+
+<p>Joe Watkins joined in H2 and published ORT, a PHP tensor library with backends for SSE2/SSE4.1/AVX2/AVX512, NEON, CUDA, RISC-V64, and WebAssembly (including a custom IEEE 754-2008 float16 implementation in C) reaching 97% test coverage and positioning PHP to participate in AI/ML workloads. Arnaud explored generational and Boehm GC, plus Modules and Snapshots PoCs.</p>
+
+<h4 id="maintenance-%26-stewardship">Maintenance &amp; stewardship</h4>
+
+<p>Beyond headline projects, the team spent a large percentage of their time carrying PHP's day-to-day weight: continuous bug triage (Ilija's largest recurring line item every month), monthly release management across 8.3.x and 8.4.x, cross-platform fixes spanning Windows, macOS, FreeBSD, Solaris, and Haiku, French (David) and Japanese (Saki) documentation contributions, mailing list moderation, and dozens of code reviews monthly across virtually every PHP subsystem. Additionally, the team spent time on maintenance and stable releases of external extensions including imagick and GnuPG, and tools like PHP-FPM that are part of PHP core.</p>
+
+<h3 id="rfcs">RFCs</h3>
+
+<p>The following list covers RFCs authored or co-authored by PHP Foundation contractors in 2025, along with their RFCs that changed status in 2025.</p>
+
+<table>
+  <tr>
+   <td><strong>RFC</strong>
+   </td>
+   <td><strong>Author</strong>
+   </td>
+   <td><strong>Status</strong>
+   </td>
+  </tr>
+  <tr>
+   <td><a href="https://wiki.php.net/rfc/url_parsing_api">URL Parsing API (ext/uri)</a>
+   </td>
+   <td>Máté Kocsis
+   </td>
+   <td>Implemented in PHP 8.5
+   </td>
+  </tr>
+  <tr>
+   <td><a href="https://wiki.php.net/rfc/deprecations_php_8_5">PHP 8.5 Deprecations</a>
+   </td>
+   <td>Gina P. Banyard, Christoph M. Becker*, Daniel Scherzer*, Tim Düsterhus*, Theodore Brown*, Jorg Sowa*, David Carlier, Jakub Zelenka, Nicolas Grekas*, Volker Dusch*, Calvin Buckle*
+   </td>
+   <td>Implemented in PHP 8.5
+   </td>
+  </tr>
+  <tr>
+   <td><a href="https://wiki.php.net/rfc/warnings-php-8-5">PHP 8.5 Warnings</a>
+   </td>
+   <td>Gina P. Banyard
+   </td>
+   <td>Implemented in PHP 8.5
+   </td>
+  </tr>
+  <tr>
+   <td><a href="https://wiki.php.net/rfc/get-error-exception-handler">Add get_error_handler(), get_exception_handler()</a>
+   </td>
+   <td>Arnaud Le Blanc
+   </td>
+   <td>Implemented in PHP 8.5
+   </td>
+  </tr>
+  <tr>
+   <td><a href="https://wiki.php.net/rfc/stream_errors">Stream Error Handling</a>
+   </td>
+   <td>Jakub Zelenka
+   </td>
+   <td>Accepted
+   </td>
+  </tr>
+  <tr>
+   <td><a href="https://wiki.php.net/rfc/tls_session_resumption_api">TLS Session Resumption</a>
+   </td>
+   <td>Jakub Zelenka
+   </td>
+   <td>Accepted
+   </td>
+  </tr>
+  <tr>
+   <td><a href="https://wiki.php.net/rfc/make_round_behave_correctly_as_float">Make round() behave correctly as float</a>
+   </td>
+   <td>Saki Takamachi
+   </td>
+   <td>Draft
+   </td>
+  </tr>
+  <tr>
+   <td><a href="https://wiki.php.net/rfc/policy-release-process-update">Policy Release Process Update</a>
+   </td>
+   <td>Jakub Zelenka
+   </td>
+   <td>Accepted
+   </td>
+  </tr>
+  <tr>
+   <td><a href="https://wiki.php.net/rfc/context-managers">Context Managers</a>
+   </td>
+   <td>Arnaud Le Blanc & Larry Garfield*
+   </td>
+   <td>In Discussion
+   </td>
+  </tr>
+  <tr>
+   <td><a href="https://wiki.php.net/rfc/partial_function_application_v2">Partial Function Application v2</a>
+   </td>
+   <td>Arnaud Le Blanc & Larry Garfield*
+   </td>
+   <td>In Implementation
+   </td>
+  </tr>
+  <tr>
+   <td><a href="https://wiki.php.net/rfc/uri_followup">URI Followup</a>
+   </td>
+   <td>Máté Kocsis
+   </td>
+   <td>Vote started
+   </td>
+  </tr>
+  <tr>
+   <td><a href="https://wiki.php.net/rfc/adopt_pie_deprecate_pecl">Deprecate PECL / Adopt PIE</a>
+   </td>
+   <td>James Titcumb
+   </td>
+   <td>Accepted
+   </td>
+  </tr>
+  <tr>
+   <td><a href="https://wiki.php.net/rfc/pattern-matching">Pattern Matching</a>
+   </td>
+   <td>Ilija Tovilo & Larry Garfield*
+   </td>
+   <td>In Discussion
+   </td>
+  </tr>
+  <tr>
+   <td><a href="https://wiki.php.net/rfc/json_schema_validation">JSON Validation Schema Support</a>
+   </td>
+   <td>Jakub Zelenka
+   </td>
+   <td>In Discussion
+   </td>
+  </tr>
+  <tr>
+   <td><a href="https://wiki.php.net/rfc/void-as-null">Void as Null</a>
+   </td>
+   <td>Gina P. Banyard
+   </td>
+   <td>In Discussion
+   </td>
+  </tr>
+  <tr>
+   <td><a href="https://wiki.php.net/rfc/tidyexception-for-tidy">TidyException Type for Tidy</a>
+   </td>
+   <td>David Carlier
+   </td>
+   <td>In Discussion
+   </td>
+  </tr>
+  <tr>
+   <td><a href="https://wiki.php.net/rfc/deprecate-function-bool-type-juggling">Deprecate Type Juggling</a>
+   </td>
+   <td>Gina P. Banyard
+   </td>
+   <td>Declined
+   </td>
+  </tr>
+  <tr>
+   <td><a href="https://wiki.php.net/rfc/make_opcache_required">Make OPcache a non-optional part of PHP</a>
+   </td>
+   <td>Tim Düsterhus*, Arnaud Le Blanc, Ilija Tovilo
+   </td>
+   <td>Implemented in 8.5
+   </td>
+   </tr>
+   <tr>
+    <td><a href="https://wiki.php.net/rfc/static-aviz">Asymmetric Visibility for Static Properties</a>
+    </td>
+   <td>Ilija Tovilo & Larry Garfield*
+   </td>
+   <td>Implemented in 8.5
+   </td>
+  </tr>
+   <tr>
+    <td><a href="https://wiki.php.net/rfc/uri_followup">Followup Improvements for ext/uri</a>
+    </td>
+   <td>Máté Kocsis
+   </td>
+   <td>Accepted
+   </td>
+  </tr>
+</table>
+
+<p>*This person was not a contractor for The PHP Foundation at time of authorship, but is acknowledged here for their contribution to the RFC</p>
+
+<h2 id="the-php-foundation-sponsors">The PHP Foundation Sponsors</h2>
+
+<p>Our sponsors and individual contributors are the lifeblood of The PHP Foundation, for without their continued support, we would not be able to continue making meaningful contributions and improvements to the PHP language.</p>
+
+<p>Our highest level sponsors for 2025 were <a href="https://www.sovereign.tech/">Sovereign Tech Agency,</a> <a href="https://www.jetbrains.com/">JetBrains</a>, <a href="https://automattic.com/">Automattic</a>, <a href="GoDaddy.com">GoDaddy.com</a>, <a href="https://www.passbolt.com/">Passbolt</a>, <a href="https://sentry.io/welcome/">Sentry</a>, <a href="http://Les-Tilleuls.coop">Les-Tilleuls.coop</a>, <a href="https://craftcms.com/">Craft CMS</a>, <a href="https://packagist.com/">Private Packagist</a>, <a href="https://cybozu.co.jp/en/company/">Cybozu</a>, <a href="https://tideways.com/">Tideways</a>, <a href="https://manychat.com/">Manychat</a>, <a href="https://www.perforce.com/products/zend">Zend by Perforce</a>, <a href="https://chstudio.fr/">CH Studio</a>, and <a href="https://aternos.gmbh/en/">Aternos GmbH</a>.</p>
+
+<p>Overall, 536 organizations and individuals sponsored The PHP Foundation in 2025, which is substantially less than the previous year. This is an indication of an increasingly challenging fundraising space in the open source ecosystem, a reality our peers at other Foundations and Open Source projects are also navigating.</p>
+
+<p>We are incredibly grateful for all those who have financially supported and continue to support The PHP Foundation.</p>
+
+<h2 id="the-php-foundation-financial-report">The PHP Foundation Financial Report</h2>
+
+<p>In 2025, The PHP Foundation was financially backed by organizations and individuals with the goal of paying a competitive salary to as many core developers as possible. These numbers represent figures in USD.</p>
+
+<table>
+  <tr>
+   <td>
+   </td>
+   <td><strong>2021-2022</strong>
+   </td>
+   <td><strong>2023</strong>
+   </td>
+   <td><strong>2024</strong>
+   </td>
+   <td><strong>2025**</strong>
+   </td>
+  </tr>
+  <tr>
+   <td>Total donated
+   </td>
+   <td>$ 712,484
+   </td>
+   <td>$ 478,767
+   </td>
+   <td>$ 683,550
+   </td>
+   <td>$ 730,534
+   </td>
+  </tr>
+  <tr>
+   <td>Fees *
+   </td>
+   <td>$ 90,273
+   </td>
+   <td>$ 60,098
+   </td>
+   <td>$ 83,110
+   </td>
+   <td>$ 85,343
+   </td>
+  </tr>
+  <tr>
+   <td>Total received
+   </td>
+   <td>$ 622,211
+   </td>
+   <td>$ 418,669
+   </td>
+   <td>$ 600,440
+   </td>
+   <td>$ 645,191
+   </td>
+  </tr>
+  <tr>
+   <td>Expenses
+   </td>
+   <td>$ 133,285
+   </td>
+   <td>$ 275,181
+   </td>
+   <td>$ 635,487
+   </td>
+   <td>$ 784,376
+   </td>
+  </tr>
+</table>
+
+<p>*Fees include a 10% Open Source Collective fiscal host fee (dealing with contracts, expense reviews and payments, bank account management, official registrations and dealing with government requirements, open collective platform development etc), and 1-5% percent of payment processing fees, depending on the payment method used.</p>
+
+<p>**Starting in 2025, some funds were donated and paid in Euro; please allow for small rounding variance due to conversion rates.</p>
+
+<p>All incoming and outgoing transactions of The PHP Foundation are publicly available to view for anyone: <a href="https://opencollective.com/phpfoundation#category-BUDGET">https://opencollective.com/phpfoundation#category-BUDGET</a></p>
+
+<h2 id="the-php-foundation-brand-%26-public-channels">The PHP Foundation Brand &amp; Public Channels</h2>
+
+<p>The PHP Foundation represents a community of core PHP developers and advocates for the PHP programming language. The PHP Foundation used the channels listed below for public communication:</p>
+
+<ul>
+<li>24.8K LinkedIn page followers: <a href="https://www.linkedin.com/company/phpfoundation">https://www.linkedin.com/company/phpfoundation</a></li>
+<li>13.7K X followers: <a href="https://x.com/thephpf">https://x.com/thephpf</a></li>
+<li>1.2K Mastodon followers: <a href="https://phpc.social/@thephpf">https://phpc.social/@thephpf</a></li>
+<li>1.2K Bluesky followers: <a href="https://bsky.app/profile/thephpf.bsky.social">https://bsky.app/profile/thephpf.bsky.social</a></li>
+<li>3390 Subscribers to The PHP Foundation Newsletter</li>
+</ul>
+
+<p>We will continue to grow our social media presence as a means of connecting with the broader PHP community.</p>
+
+<h2 id="looking-back%3A-goals-for-2025">Looking Back: Goals for 2025</h2>
+
+<p>In the previous report, we outlined a few organizational and technical goals. Let's take a look at how we did.</p>
+
+<h3 id="organization-goals">Organization Goals</h3>
+
+<ul>
+<li><p><strong>Secure funding to support core development and marketing initiatives.</strong> ✅</p>
+
+<p>The PHP Foundation received funds as noted above to continue our focus on core development and the marketing of PHP and The PHP Foundation.</p></li>
+<li><p><strong>Launch the "PHP 30" anniversary campaign in collaboration with JetBrains.</strong> ✅</p>
+
+<p>The PHP Foundation celebrated <a href="https://thephp.foundation/blog/2025/06/08/php-30/">30 years of PHP</a> at the PHPverse conference hosted by JetBrains.</p></li>
+<li><p><strong>Consolidate and grow social media presence across multiple platforms. ✅</strong></p>
+
+<p>The reach and engagement for our social media accounts grew in every platform.</p></li>
+<li><p><strong>Increase website traffic through improved documentation and resources. ❓</strong></p>
+
+<p>We only added tracking to the <a href="https://php.net">php.net</a> website toward the end of 2024, so we did not have a baseline for comparison. This is something we can measure moving forward.</p></li>
+<li><p><strong>Develop an Ambassador Program. ❌</strong></p>
+
+<p>This was discussed, but not launched. Look for a version of this in 2026.</p></li>
+<li><p><strong>Begin preparation for the "PHP Next" marketing campaign to highlight PHP's modernization. ❌</strong></p>
+
+<p>This was discussed, but not launched. Look for a version of this in 2026.</p></li>
+<li><p><strong>Modernize PHP's website with updated downloads page, documentation, and homepage. ⚠️ Partial</strong></p>
+
+<p>This was partially completed and included a <a href="https://www.php.net/releases/8.5/en.php">redesigned page for the 8.5 release</a> and a clearer and more functional Downloads page. There is still work to be done on the homepage and in the documentation.</p></li>
+</ul>
+
+<h3 id="technical-goals">Technical Goals</h3>
+
+<ul>
+<li><p><strong>Continue on-going maintenance and development of the PHP core. ✅</strong></p>
+
+<p>As demonstrated in this report, our contractors continue to focus on improving the PHP core.</p></li>
+<li><p><strong>Establish a working group for integrating modern HTTP server capabilities into PHP core. ✅</strong></p>
+
+<p>Instead, the PHP project incorporated the FrankenPHP project into its GitHub organization, offering a modern solution to running PHP in an HTTP server. This change was initiated by engineers at <a href="https://les-tilleuls.coop/en/">Les-Tilleuls.coop</a>, and implemented in partnership with the PHP Foundation.</p></li>
+<li><p><strong>Address key developer experience pain points, particularly for first-time users. ⚠️ Partial</strong></p>
+
+<p>This was partially completed with the improvements on the Downloads page, but there is still much work and research to be done here.</p></li>
+</ul>
+
+<h2 id="looking-ahead%3A-goals-for-2026">Looking Ahead: Goals for 2026</h2>
+
+<p>2026 brings its own challenges but we are committed to continuing to make a measurable difference in the PHP language and ecosystem.</p>
+
+<h3 id="organization-goals">Organization Goals</h3>
+
+<ul>
+<li>Complete the executive transition initiated in Q4 2025</li>
+<li>Complete the onboarding of a Director of Fundraising</li>
+<li>Expand support for the PHP Ecosystem</li>
+<li>Improve Foundation communication, transparency, and internal documentation</li>
+<li>Build a plan to improve public perception of PHP</li>
+<li>Balance spending with funding and creating a systematic approach to fundraising</li>
+</ul>
+
+<h3 id="technical-goals">Technical Goals</h3>
+
+<ul>
+<li>Create Cryptography working group</li>
+<li>Explore support for continued security-focused work</li>
+</ul>
+
+<h2 id="budget-plan-for-2026">Budget plan for 2026</h2>
+
+<p>Total expenses exceeded total received donations by approximately $139,000 in 2025, which was a deliberate choice to maintain investment in technical headcount while we strengthen relationships with sponsors and individual contributors. The PHP Foundation remains financially solvent with healthy reserves, and reducing this gap is a 2026 priority.</p>
+
+<p>We will also continue to utilize <a href="https://opencollective.com/phpfoundation">Open Collective</a> as our fiscal host, as they provide transparency and a suite of valuable financial services for The PHP Foundation.</p>
+
+<h2 id="outro">Outro</h2>
+
+<p>The work in this report is the runway for what's next. We head into 2026 with real momentum and a clear sense of what the community has asked of us.  None of the technical leadership, the security work, the new partnerships ahead, and the support for the PHP ecosystem happens without the people who fund us. <a href="https://thephp.foundation/sponsor/">With your help</a>, together we can keep PHP thriving in a changing open source world.</p>
+
+        </div>
+
+        <ul role="list" class="border-t pt-5 my-5 divide-y divide-gray-200 xl:col-span-3">
+                                                <li class="flex flex-col gap-10 py-12 first:pt-0 last:pb-0 sm:flex-row">
+                <img src="/assets/team/elizabeth_barron.jpeg" alt="Elizabeth Barron"
+                     class="w-16 h-16 rounded-full lg:w-20 lg:h-20"/>
+                <div class="max-w-xl flex-auto leading-6 space-y-1">
+                    <div class="text-lg/8 font-semibold tracking-tight text-gray-900">Elizabeth Barron</div>
+                                        <div class="text-base/7 text-[#7f52ff]">Executive Director</div>
+                                        <ul class="flex space-x-4 list-none p-0 m-0">
+                                                <li>
+                            <a href="https://www.linkedin.com/in/elizabethn"
+                               class="text-gray-400 hover:text-gray-500" rel="noreferrer noopener"
+                               target="_blank" itemprop="url">
+                                <span class="sr-only">LinkedIn</span>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </a>
+                        </li>
+                        
+                                                <li>
+                            <a href="https://fosstodon.org/@elizabeth"
+                               class="text-gray-400 hover:text-gray-500" rel="noreferrer noopener"
+                               target="_blank" itemprop="url">
+                                <span class="sr-only">Mastodon</span>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z"/>
+                                </svg>
+                            </a>
+                        </li>
+                        
+                        
+                                            </ul>
+                </div>
+            </li>
+                                </ul>
+
+        <div class="border-t pt-5 my-5">
+            <div
+    class="thread-container"
+    data-reddit-thread=""
+    data-reddit-search="PHP"
+    data-reddit-suggest-title="The PHP Foundation Impact and Transparency Report 2025"
+    data-reddit-max-depth="10"
+    data-reddit-show-content="false"
+    data-reddit-show-controls="true"
+></div>
+<script>window.REDDITIFY_PROXY_URL = 'https://redditify-proxy.root-8f3.workers.dev';</script>
+<link rel="stylesheet" href="https://unpkg.com/redditify/dist/redditify.css">
+<script src="https://unpkg.com/redditify/dist/redditify.min.js"></script>
+
+        </div>
+
+        <div class="border-t pt-5 my-5">
+                        <nav class="flex flex-row justify-between article -mx-2 mb-5">
+                                <a href="https://thephp.foundation/blog/2026/05/18/announcing-ecosystem-security-team/"
+                   class="flex flex-col w-1/2 border p-2 mx-2 rounded hover:border-[#7f52ff] transition-all no-underline">
+                    <div class="mb-1 text-sm text-gray-600 font-medium">Previous</div>
+                    <div class="font-bold text-blue-500">Announcing the Ecosystem Security Team at The PHP Foundation</div>
+                </a>
+                
+                                <a href="https://thephp.foundation/blog/2026/05/28/phpverse-keynote/"
+                   class="flex flex-col w-1/2 border p-2 mx-2 rounded hover:border-[rgba(127,82,255,.8)] transition-all no-underline">
+                    <div class="mb-1 text-sm text-gray-600 font-medium">Next</div>
+                    <div class="font-bold text-blue-500">The PHP Foundation’s Elizabeth Barron to keynote JetBrains PHPverse 2026</div>
+                </a>
+                            </nav>
+            
+            <div>
+                <a href="https://github.com/ThePHPF/thephp.foundation/edit/main/source/_posts/2026-05-27-impact-and-transparency-report-2025.md"
+                   class="nav-org" rel="noopener noreferrer" target="_blank">Edit this page on GitHub</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-gray-900">
+    <div class="mx-auto max-w-7xl overflow-hidden px-6 py-12 lg:px-8">
+        <ul class="list-none grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-1 max-w-xl mx-auto text-sm leading-6 text-gray-400" >
+            <li><a href="/sponsor"          class="text-gray-400 hover:text-gray-100 no-underline">Sponsor</a></li>
+            <li><a href="/structure"        class="text-gray-400 hover:text-gray-100 no-underline">Structure</a></li>
+            <li><a href="/structure#admins" class="text-gray-400 hover:text-gray-100 no-underline">Board</a></li>
+            <li><a href="/structure#core_developers"        class="text-gray-400 hover:text-gray-100 no-underline">Developers</a></li>
+            <li><a href="/blog"             class="text-gray-400 hover:text-gray-100 no-underline">News</a></li>
+            <li><a href="/presentations"    class="text-gray-400 hover:text-gray-100 no-underline">Talks</a></li>
+            <li><a href="/branding"         class="text-gray-400 hover:text-gray-100 no-underline">Brand Guide</a></li>
+            <li><a href="/governance"       class="text-gray-400 hover:text-gray-100 no-underline">Governance</a></li>
+            <li><a href="/code-of-conduct"  class="text-gray-400 hover:text-gray-100 no-underline">Code of Conduct</a></li>
+            <li><a href="/contact"          class="text-gray-400 hover:text-gray-100 no-underline">Contact</a></li>
+        </ul>
+
+        <div class="mt-10 flex justify-center space-x-10 items-center">
+            <a href="https://twitter.com/thephpf" target="_blank" rel="noopener noreferrer"
+               class="text-gray-400 hover:text-gray-500">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                    <g>
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                    </g>
+                </svg>
+            </a>
+
+            <a href="https://github.com/ThePHPF/thephp.foundation" class="text-gray-400 hover:text-gray-500"
+               target="_blank" rel="noopener noreferrer">
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                          clip-rule="evenodd"/>
+                </svg>
+            </a>
+
+            <a href="https://phpc.social/@thephpf" class="text-gray-400 hover:text-gray-500" target="_blank"
+               rel="noopener noreferrer">
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z"/>
+                </svg>
+            </a>
+
+            <a href="https://www.linkedin.com/company/phpfoundation/" class="text-gray-400 hover:text-gray-500"
+               target="_blank" rel="noopener noreferrer">
+                <svg class="h-6 w-6"
+                     viewBox="0 0 56.693 56.693" fill="currentColor"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                        <path d="M30.071,27.101v-0.077c-0.016,0.026-0.033,0.052-0.05,0.077H30.071z"/>
+                        <path
+                                d="M49.265,4.667H7.145c-2.016,0-3.651,1.596-3.651,3.563v42.613c0,1.966,1.635,3.562,3.651,3.562h42.12   c2.019,0,3.654-1.597,3.654-3.562V8.23C52.919,6.262,51.283,4.667,49.265,4.667z M18.475,46.304h-7.465V23.845h7.465V46.304z    M14.743,20.777h-0.05c-2.504,0-4.124-1.725-4.124-3.88c0-2.203,1.67-3.88,4.223-3.88c2.554,0,4.125,1.677,4.175,3.88   C18.967,19.052,17.345,20.777,14.743,20.777z M45.394,46.304h-7.465V34.286c0-3.018-1.08-5.078-3.781-5.078   c-2.062,0-3.29,1.389-3.831,2.731c-0.197,0.479-0.245,1.149-0.245,1.821v12.543h-7.465c0,0,0.098-20.354,0-22.459h7.465v3.179   c0.992-1.53,2.766-3.709,6.729-3.709c4.911,0,8.594,3.211,8.594,10.11V46.304z"/>
+                    </g>
+                </svg>
+            </a>
+        </div>
+        <div class="mt-10 text-center text-xs leading-5 text-gray-500" itemprop="copyrightHolder">&copy; The PHP Foundation</div>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const anchors = new AnchorJS()
+        anchors.add()
+
+        for (const element of document.getElementsByClassName('anchorjs-link')) {
+            element.addEventListener('click', function () {
+                navigator.clipboard.writeText(window.location.origin + window.location.pathname + element.getAttribute('href'))
+            })
+        }
+    })
+</script>
+
+
+<script>hljs.highlightAll();</script>
+
+<script src="https://cdn.usefathom.com/script.js" data-site="PJKRZUTE" defer></script>
+<!-- Matomo -->
+<script>
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+        var u="https://analytics.thephp.foundation/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+</script>
+<noscript><p><img referrerpolicy="no-referrer-when-downgrade" src="https://analytics.thephp.foundation/matomo.php?idsite=1&amp;rec=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Matomo Code -->
+
+</body>
+</html>

@@ -1,282 +1,707 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title><![CDATA[The PHP Foundation]]></title>
-    <link href="/atom.xml" rel="self"/>
-    <link href="/"/>
-    <updated>2022-04-28T09:50:48+00:00</updated>
-    <id>/</id>
+    <link href="https://thephp.foundation/atom.xml" rel="self"/>
+    <link href="https://thephp.foundation/"/>
+    <updated>2026-08-18T17:24:44+00:00</updated>
+    <id>https://thephp.foundation/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
-            <title type="html"><![CDATA[PHP Roundup &amp;#35;1]]></title>
-            <link href="/blog/2022/04/28/php-roundup-1/"/>
-            <updated>2022-04-28T00:00:00+00:00</updated>
-            <id>/blog/2022/04/28/php-roundup-1/</id>
-            <content type="html"><![CDATA[<p>Welcome to the first <em>PHP Roundup</em>, where we’ll make regular updates on the improvements made to PHP by the <em>PHP Foundation</em> and other contributors. PHP Roundup is prepared by Ayesh Karunaratne from <strong><a href="https://php.watch">PHP.Watch</a></strong>, a source for PHP news and articles on upcoming changes.</p>
+            <title type="html"><![CDATA[PHP Ambassadors: Six Weeks In]]></title>
+            <link href="https://thephp.foundation/blog/2026/08/13/php-ambassadors-six-weeks-in/"/>
+            <updated>2026-08-13T00:00:00+00:00</updated>
+            <id>https://thephp.foundation/blog/2026/08/13/php-ambassadors-six-weeks-in/</id>
+            <content type="html"><![CDATA[<p>When we <a href="https://thephp.foundation/blog/2026/06/19/the-php-ambassador-program-is-open/">launched the PHP Ambassador Program</a> on June 19, 2026, we honestly didn’t know what to expect. We knew the need for something like this was definitely there, and it <em>seemed</em> like something the community would be interested in being a part of. But as they say, “you never know how a thing is going to go, until it goes.”  I mentioned in my <a href="https://thephp.foundation/blog/2026/06/11/integrating-community-feedback-into-foundation-strategy-part2/">strategy document</a> that I was hoping to enlist 10 people to attend a regular cadence of meetings. (Honestly, 10 people seemed like a reasonable number.)</p>
 
-<p>In this series, we highlight some of the interesting and major improvements made to the PHP language. Traditionally, the PHP team releases a new minor version of the interpreter towards the end of each year, but the changes and improvements are discussed and implemented throughout the year.</p>
+<p>Not only did you all surpass that number by leaps and bounds, you continue to show up and join the group. <em>We now have 150 people who have expressed interest in the Program</em>. I couldn’t be more excited about your enthusiasm!</p>
 
-<p>You don’t necessarily have to be a PHP Foundation backer to follow the PHP Roundup. We’ll be publishing the posts on our website, and you can subscribe to a newsletter:</p>
+<h2 id="what-we-learned">What we learned</h2>
 
-<form method="POST" action="https://php-foundation-mailcoach.com/subscribe/9be4e2bd-f9d8-475c-b00e-2dcc4cf90056" class="mb-8 flex justify-center items-center h-screen">
-    <div>
-        <label for="email" >Email</label>
-        <input type=email name="email" class="form-inp">
-        <button type="submit" class="form-btn">Subscribe</button>
-    </div>
-</form>
-
-<p>The PHP Foundation currently supports six part-time PHP contributors who work on both maintenance and new features for PHP. Maintenance is not limited to fixing bugs, but also includes work to reduce technical debt, making life easier for everyone working on PHP. The contributors funded by the PHP Foundation collaborate with other contributors on code, documentation, and discussions.</p>
-
-<p>Things marked with 💜 are done by the PHP Foundation team.</p>
-
-<p>Let’s get straight to the updates.</p>
-
-<h2 id="rfc-updates">RFC Updates</h2>
-
-<p>Every major change to PHP is discussed and implemented with the consensus of the PHP community. Each RFC proposes a set of changes, and the PHP Internals community holds a vote that lasts two weeks by default.</p>
+<p>Some things we’ve learned about this group:</p>
 
 <ul>
-<li><p><strong>Accepted: <a href="https://wiki.php.net/rfc/null-false-standalone-types">Allow null and false as stand-alone types</a> 💜</strong></p>
-
-<p>RFC by George Peter Banyard was accepted unanimously with all 38 votes in favor and is now merged into PHP.</p>
-
-<p>Prior to this change, <code>null</code>and <code>false</code>could only be used as part of a Union Type, but not as stand-alone types. This change further improves PHP’s type system to be more expressive and defensive. See the <code>true</code> type RFC below that proposes adding <code>true</code>as a type too.</p>
-
-<p>Learn more about this RFC from the <a href="https://phpinternals.news/99">PHP Internals News podcast</a> hosted by Derick Rethans.</p></li>
-<li><p><strong>Implemented: <a href="https://wiki.php.net/rfc/redact_parameters_in_back_traces">Redacting parameters in back traces</a></strong></p>
-
-<p>RFC by Tim Düsterhus, approved with 24:1 votes in favor, is now implemented in PHP core.</p>
-
-<p>This RFC proposed adding a <code>#[SensitiveParameter]</code> attribute that redacts the parameter's actual value when it is spewed out in stack traces and <code>var_dump</code>output. The attribute can be used to prevent leaking sensitive information in debugging logs.</p>
-
-<p>Learn more about this RFC from the <a href="https://phpinternals.news/97">PHP Internals News podcast</a> hosted by Derick Rethans.</p></li>
-<li><p><strong>Discussion: <a href="https://wiki.php.net/rfc/true-type">Add true type</a> 💜</strong></p>
-
-<p>RFC by George Peter Banyard is currently under discussion, to add true as a type to PHP. In PHP 8.0 Union Types, we added <code>false</code>as one of the possible members of Union Types, but left out <code>true</code>. This RFC proposes to complete it by adding <code>true</code>as a type as well.</p></li>
-<li><p><strong>Accepted: <a href="https://wiki.php.net/rfc/undefined_variable_error_promotion">Undefined Variable Error Promotion</a></strong></p>
-
-<p>RFC by Mark Randall accepted with 33:8 votes in favor.</p>
-
-<p>This proposes to convert the current behavior of PHP raising a warning for accessing an undefined variable (PHP 8.0+) to throw an Error exception instead in PHP 9.0.</p></li>
-<li><p><strong>Voting: <a href="https://wiki.php.net/rfc/undefined_property_error_promotion">Undefined Property Error Promotion</a></strong></p>
-
-<p>Another RFC by Mark Randall proposes to throw an error on undefined class property access, similar to the now accepted changes with undefined variables. Notably, PHP 8.2 already emits deprecation notices on dynamic property creation (<a href="https://php.watch/versions/8.2/dynamic-properties-deprecated#exempt">with a few exceptions</a>).</p></li>
-<li><p><strong>Voting: <a href="https://wiki.php.net/rfc/readonly_classes">Readonly classes</a> 💜</strong></p>
-
-<p>RFC by Máté Kocsis proposes to add support for readonly classes. In such a class, all properties are <code>readonly</code>and dynamic properties are forbidden. Voting is scheduled to start on April 27th.</p></li>
-<li><p><strong>Accepted: <a href="https://wiki.php.net/rfc/deprecate_dollar_brace_string_interpolation">Deprecate ${} string interpolation</a> 💜</strong></p>
-
-<p>RFC by Ilija Tovilo accepted with 31:1 votes in favor.</p>
-
-<p>This RFC proposes to deprecate <code>"${foo}"</code> and "<code>${(foo)}</code>" string interpolation patterns. It does <em>not</em> deprecate the standard "<code>{$foo}</code>" pattern.</p></li>
-<li><p><strong>Accepted: <a href="https://wiki.php.net/rfc/remove_utf8_decode_and_utf8_encode">Deprecate and Remove utf8_encode and utf8_decode</a></strong></p>
-
-<p>Learn more about this RFC from the <a href="https://phpinternals.news/98">PHP Internals News podcast</a> hosted by Derick Rethans.</p></li>
-</ul>
-
-<h2 id="merged-prs-and-commits">Merged PRs and Commits</h2>
-
-<p>Some of the minor changes made to PHP are first made as a pull request to the <a href="github.com/php/php-src">PHP GitHub project</a>, and if deemed acceptable by PHP core maintainers, they are merged without going through a formal RFC process. We have automatic tests in place to flag PRs that break existing functionality. The majority of the minor changes from the community are made through PRs.</p>
+<li><strong>Maintain flexible infrastructure choices:</strong> When starting a new community, it's important to remember that it’s ok to try different options for infrastructure. Every community takes on a life of its own, and for this group, GitHub Discussions did not seem to take hold as a place where the community wanted to interact. As well, Google Meet did not provide us with the options for meeting management that we wanted. And third, inviting folks individually to meetings became unwieldy and got me flagged as a spammer. So instead of using GitHub, Google Meet, and Google invites, we are using Discord, Zoom, and a Google calendar to manage this community's interactions and these meetings.</li>
+<li><strong>Divide and conquer:</strong> We had enough interest to break the larger group into smaller, more focused groups:
 
 <ul>
-<li>New: <a href="https://github.com/php/php-src/pull/7823">Introduce CURLOPT_XFERINFOFUNCTION</a> by <a href="https://github.com/devnexen">David CARLIER</a>.</li>
-<li>Fixed: <a href="https://github.com/php/php-src/issues/8133">Constants in Enum classes causes php-fpm worker to segfault</a> by Ilija Tovilo. 💜</li>
-<li>Fixed: <a href="https://github.com/php/php-src/issues/8273">SplFileObject: key() returns wrong value</a> by George Peter Banyard. <strong>💜</strong></li>
-<li>Fixed: Bug #<a href="https://bugs.php.net/bug.php?id=76003">76003</a> <a href="https://github.com/php/php-src/commit/33bb201b3eddbda0cc93c9cd1cb9adb4c77d0df2">FPM /status reports wrong number of active processes</a> by Jakub Zelenka <strong>💜</strong></li>
-<li>Fixed: Bug #<a href="https://github.com/php/php-src/commit/d8612fb6b7496a4f17e8250037a00b26623c1c77">77023 PHP-FPM cannot shutdown processes</a> by Jakub Zelenka <strong>💜</strong></li>
-<li>Reviewed and merged various fixes and improvements to FPM by Jakub Zelenka: <strong>💜</strong>
-
-<ul>
-<li><a href="https://github.com/php/php-src/commit/2874e5fa052d54affd31ed5eaf3e0d53c9116c93">Emitting error for invalid listen port</a> (implemented by David Carlier)</li>
-<li><a href="https://github.com/php/php-src/commit/7bb2a9ff38b739d2143134b6ce0d9cc3dd9b78fe">SELinux dumpable</a> (implemented by David Carlier)</li>
-<li><a href="https://github.com/php/php-src/commit/2f0918c638cbba0f5d36b9b2f3d0aa8cf95651c9">Clang warning in socket cleanup</a> (implemented by David Carlier)</li>
-<li><a href="https://github.com/php/php-src/commit/7be195caa7589560d5e1a019e389850fdb5c8a1e">Listening queue MacOS support</a> (implemented by David Carlier)</li>
-<li><a href="https://github.com/php/php-src/commit/1e562683cb995b9903f4d24ba9eb5bb89ae3fbfb">New default for listen backlog on Linux</a> (implemented by Cristian Rodríguez)</li>
-<li><a href="https://github.com/php/php-src/commit/ff90d42b8bc292bd7bfc532e29e5cdff242ee3e1">Kqueue typo in remove callback type</a> (implemented by David Carlier)</li>
+<li>Research: focused on locating and vetting sources of information and truth that the community can use in their articles and presentations</li>
+<li>Marketing: focused on the messaging of PHP (including the php.net website)</li>
+<li>Speakers: focused on providing structure and resources for people who want to give talks outside the PHP ecosystem</li>
 </ul></li>
-<li>Fixed: Various (<a href="https://github.com/php/php-src/issues/7752">1</a>, <a href="https://github.com/php/php-src/issues/8101">2</a>, <a href="https://bugs.php.net/bug.php?id=81660">3</a>) bugs related to DateTime support, as well as reimplementing serialization support for all classes, by Derick Rethans 💜</li>
-<li>Improved: Migrated most of the CI setup from Azure Pipelines to GitHub Actions by Ilija Tovilo 💜</li>
-<li>Fixed: <a href="https://github.com/php/php-src/issues/8310">Registry settings are no longer recognized</a> by Christoph M. Becker, reported by Vladimir S.</li>
-<li>Several engine improvements by Dmitry Stogov and Nikita Popov.</li>
+<li><strong>Give opportunities for overlap:</strong> As our topics of discussion became more focused, many people wanted to be in more than one group at a time. Also, a 30 minute breakout once a month is not enough to make real progress.  For those reasons, we have afforded each group their own meeting space, while maintaining the monthly meeting that includes everyone. Allowing people to participate in more than one group at a time means there will be more opportunities for cross-pollination and coordination among the three subgroups.</li>
 </ul>
 
-<p>Apart from the highlighted changes above, there have been more improvements and fixes from @divinity76, Marco Pivetta, Arnaud Le Blanc, Alex Dowad, and more.</p>
+<h2 id="group-progress">Group Progress</h2>
 
-<h2 id="mailing-list-discussions">Mailing List Discussions</h2>
+<p>Ideas are great, but what about actions? We have a goal in each group to build tangible assets and to keep momentum going. Launching is hard, but maintaining engagement and providing real outcomes is harder. So let's talk about what each of these groups is currently working on.</p>
+
+<h3 id="research">Research</h3>
+
+<p>As the smallest of the three groups, we tasked ourselves with identifying and listing the current available resources that are out there around PHP usage and other data points that might be of interest to our community. We felt that it was important to have a lay of the land as a starting point. We are still working on putting this into a format that we can share in the <a href="https://github.com/ThePHPF/SIG-ambassadors/tree/main/subgroup-research">Research portion of the SIG-Ambassador Repo</a>, but we have some notes started. If you know of a source of data that should be included, please share with us by <a href="https://github.com/ThePHPF/SIG-ambassadors/issues">opening an issue in the repo</a>.</p>
+
+<p><strong>Group Info:</strong></p>
 
 <ul>
-<li><a href="https://externals.io/message/117577">Canonicalize "iterable" into "array|Traversable" and Reflection</a>, started by George Peter Banyard. 💜</li>
-<li><a href="https://externals.io/message/117486">MySQLi Execute Query RFC</a>, started by Craig Francis.</li>
-<li><a href="https://externals.io/message/117501">NULL Coercion Consistency</a>, also started by Craig Francis.</li>
+<li>Discord channel: <a href="https://discord.com/channels/356354025865740288/1530212583833997392">#php-amb-research</a></li>
+<li>GitHub repo: <a href="https://github.com/ThePHPF/SIG-ambassadors/tree/main/subgroup-research">Research subgroup</a></li>
+<li>Next meeting: <strong>Friday, August 28, 2026 at 13:00 UTC</strong></li>
 </ul>
 
-<h2 id="support-php-foundation">Support PHP Foundation</h2>
+<h3 id="marketing">Marketing</h3>
 
-<p>At PHP Foundation, we support, promote, and advance the PHP language. We financially support six part-time PHP core developers to contribute to the PHP project. You can help support PHP Foundation at <a href="https://opencollective.com/phpfoundation">OpenCollective</a>.</p>
+<p>There is an <a href="https://github.com/php/web-php/pull/1962">active draft PR</a> that proposes some initial structural updates to the php.net website. The original PR was created largely from the work of Mark Randall, and it has gone through several collaborative iterations. The php.net website was one of the things most mentioned to me in the <a href="https://thephp.foundation/blog/2026/04/16/integrating-community-feedback-into-foundation-strategy-part1/">Listening Tour</a> as a place that could use some help, so it’s great to see this next iteration being created by the community. I would venture to say this is the first in many iterations to come! Thanks to <a href="https://www.linkedin.com/in/mattstauffer/">Matt Stauffer</a> for shepherding this group and keeping progress moving forward.</p>
 
-<p>A big thanks to all our sponsors — PHP Foundation is all of us!</p>
+<p><strong>Group Info:</strong></p>
 
-<p>A special mention goes to <a href="https://mailcoach.app/">mailcoach.app</a> for providing us with a platform for the newsletter.</p>
+<ul>
+<li>Discord channel: <a href="https://discord.com/channels/356354025865740288/1530212454309826571">#php-amb-marketing</a></li>
+<li>GitHub repo: <a href="https://github.com/ThePHPF/SIG-ambassadors/tree/main/subgroup-marketing">Marketing subgroup</a></li>
+<li>Next meeting: <strong>Friday, August 14, 2026 at 14:00 UTC</strong></li>
+</ul>
 
-<p>Follow us on Twitter <a href="https://twitter.com/thephpf">@ThePHPF</a> to get the latest updates from the Foundation.</p>
+<h3 id="speakers">Speakers</h3>
 
-<p>💜️ 🐘</p>
+<p><a href="https://www.linkedin.com/in/secondej/">James Seconde</a> from Vonage has done an amazing job shepherding this third and final group: the speakers. He has started a PR that offers <a href="https://github.com/ThePHPF/SIG-ambassadors/pull/24">guidelines for a more structured, Foundation-backed Speaker Program</a>. The community has chimed in, but we are still open to receiving feedback on how a program like this might work. This group has also started compiling a <a href="https://docs.google.com/spreadsheets/d/1TCy25FqB_c2n1UhwtGN4AdL_plMPHQceNi6UpOSjBok/edit">spreadsheet of events</a> outside our PHP bubble as a resource for PHP Ambassador speakers (or anyone else in the community). We would appreciate more eyes on this and the addition of more information. If you have thoughts on either of these things, we highly encourage you to join this group!</p>
+
+<p><strong>Group Info:</strong></p>
+
+<ul>
+<li>Discord channel: <a href="https://discord.com/channels/356354025865740288/1530212493019058257">#php-amb-speakers</a></li>
+<li>GitHub repo: <a href="https://github.com/ThePHPF/SIG-ambassadors/tree/main/subgroup-speakers">Speakers subgroup</a></li>
+<li>Next meeting: <strong>Thursday, August 27, 2026 at 13:00 UTC</strong></li>
+</ul>
+
+<h2 id="join-us%21">Join us!</h2>
+
+<p>If shaping the messaging around PHP and improving the perception of the language outside our bubbles is important to you, we would love to include you in this group!</p>
+
+<p>Even if you aren’t sure where you fit in, you can participate in the larger effort:</p>
+
+<ul>
+<li>Discord: <a href="https://discord.com/channels/356354025865740288/1521534247813255229">#php-ambassadors</a></li>
+<li>Repo: <a href="https://github.com/ThePHPF/SIG-ambassadors/tree/main">SIG-Ambassadors</a></li>
+<li>Calendar of meetings: <a href="https://calendar.google.com/calendar/u/3?cid=Y19lMzY3ZGQyMzRiNTkwZGExY2M1NjM3ZTEyZmE2ODJlYjA0YzZkOWU4N2E5OWY1ZDY2YzMxNjI5YmIxYTE4MDNkQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20">Subscribe here</a></li>
+<li>Next meeting: <strong>Friday, August 14, 2026 at 13:00 UTC</strong></li>
+</ul>
+
+<p>To be added to the mailing list where you will be kept up-to-date on all the PHP Ambassador news, register your interest using <a href="https://forms.gle/cAFDZ1gC22ajxx6VA">this form</a>. (Of course you can unsubscribe at any time, and we will still love you. We promise.)</p>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Anne McCarthy Joins The PHP Foundation Board]]></title>
+            <link href="https://thephp.foundation/blog/2026/08/04/anne-mccarthy-joins-the-board/"/>
+            <updated>2026-08-04T00:00:00+00:00</updated>
+            <id>https://thephp.foundation/blog/2026/08/04/anne-mccarthy-joins-the-board/</id>
+            <content type="html"><![CDATA[<p><img src="/assets/post-images/2026/anne-mccarthy/anne-mccarthy.jpg" width="300" alt="photo of anne mccarthy giving a presentation" class="mb-4 sm:mr-4 sm:float-left"/>The PHP Foundation Governing Board consists of a variety of folks from across the PHP ecosystem that share a vested interest in the success and sustainability of PHP. Representatives from the community, the core contribution team, and sponsors comprise this team to provide guidance and insight into the Foundation's objectives and initiatives. After a unanimous decision, we are incredibly pleased to be adding <a href="https://www.linkedin.com/in/anneguionmccarthy/">Anne McCarthy</a>, Architect and Open Source Director for Automattic, to our Board as a platinum sponsor representative.</p>
+
+<p>Anne brings 15 years of technical and open source experience, and has spent the last 12 years at Automattic, dedicated to improving the experience of the Wordpress community of users and contributors alike. They bring a balanced mix of thoughtful empathy and deep technical knowledge and will be a tremendous asset to the Foundation moving forward.</p>
 
 <blockquote>
-  <p>PHP Roundup is prepared by Ayesh Karunaratne from <strong><a href="https://php.watch">PHP.Watch</a></strong>, a source for PHP News, Articles, Upcoming Changes, and more.</p>
+  <p>Open source comes down to people trying, caring, and showing up to benefit the collective. This feels like an especially powerful act in today's world so it's a real honor to join the PHP Foundation Board to support those who have given so much to PHP and all the other projects built with it. -- Anne McCarthy</p>
 </blockquote>
+
+<p>You can find Anne mostly in Seattle, WA where mountains and dogs both fill their soul with a special kind of joy. Please join us in welcoming Anne to The PHP Foundation Governing Board!</p>
 ]]></content>
         </entry>
             <entry>
-            <title type="html"><![CDATA[The PHP Foundation Update, March 2022]]></title>
-            <link href="/blog/2022/03/31/the-php-foundation-update-march-2022/"/>
-            <updated>2022-03-31T00:00:00+00:00</updated>
-            <id>/blog/2022/03/31/the-php-foundation-update-march-2022/</id>
-            <content type="html"><![CDATA[<p><code>&lt;?php echo 'Hello world!';</code></p>
+            <title type="html"><![CDATA[Kicking off the PHP Onboarding Initiative Special Interest Group]]></title>
+            <link href="https://thephp.foundation/blog/2026/08/03/kicking-off-the-php-onboarding-initiative/"/>
+            <updated>2026-08-03T00:00:00+00:00</updated>
+            <id>https://thephp.foundation/blog/2026/08/03/kicking-off-the-php-onboarding-initiative/</id>
+            <content type="html"><![CDATA[<p>One of the most common pieces of feedback we hear from the PHP community is that the newcomer experience could use some improvement, and that we may be losing new users because of it. This is something that we as a community can address, and it's why The PHP Foundation made it part of our <a href="https://thephp.foundation/blog/2026/06/11/integrating-community-feedback-into-foundation-strategy-part2/#3.-php-onboarding-initiative">strategy document</a> for the rest of 2026. Improving that experience matters a lot to us, because a better new user experience means more community growth and retention. We are launching the PHP Onboarding Initiative Special Interest Group to provide space for collaborative problem solving in this area.</p>
 
-<p>We promised to publish monthly updates, but something everything went wrong in February.</p>
-
-<p>Thank you all for being understanding about the lack of update in February. This post will bring you all up to date on everything that's been accomplished since our last post in January.</p>
-
-<h3 id="php-foundation-core-developers">PHP Foundation Core Developers</h3>
-
-<p>One of our primary goals for 2022 is to find and hire developers to work on the core.</p>
-
-<p>We are excited to reveal our initial group of sponsored developers!</p>
+<p>Some of the identified issues in the PHP newcomer experience include:</p>
 
 <ul>
-<li><strong>Arnaud Le Blanc</strong> <a href="https://github.com/arnaud-lb">@arnaud-lb</a></li>
-<li><strong>Derick Rethans</strong> <a href="https://github.com/derickr">@derickr</a></li>
-<li><strong>George Peter Banyard</strong> <a href="https://github.com/Girgias">@Girgias</a></li>
-<li><strong>Ilija Tovilo</strong> <a href="https://github.com/iluuu1994">@iluuu1994</a></li>
-<li><strong>Jakub Zelenka</strong> <a href="https://github.com/bukka">@bukka</a></li>
-<li><strong>Máté Kocsis</strong> <a href="https://github.com/kocsismate">@kocsismate</a></li>
+<li><strong>Where to begin:</strong> It is difficult for new PHP users to know where to start. There are many resources and tutorials available, but it is hard to know which ones are updated and accurate, and the sheer number of them is overwhelming. Building and helping people find resources that cater to their needs is something that would be helpful for newcomers.</li>
+<li><strong>Minding the gap:</strong> The <a href="http://php.net/docs">php.net Manual</a> is a fantastic resource, but it is more of a reference than an educational resource for beginners that are learning to code. There is a current gap between documentation for complete beginners and users who already grasp the basics and use the manual differently.</li>
+<li><strong>Limited presence in formal education:</strong> PHP is largely missing in universities and bootcamps. Although there are some places in the world where PHP (or a related framework/project) is taught, the presence of PHP is inconsistent. There won't be a "one-size-fits-all" approach to building more partnerships with educational institutions. But this is something that we can figure out together. (Also, this may overlap with the mission of the <a href="https://github.com/ThePHPF/SIG-ambassadors">PHP Ambassadors</a> Special Interest Group that has already launched.)</li>
+<li><strong>Finding your people:</strong> The onboarding experience differs greatly among newcomers, with some having connections to the community, and others fending for themselves. It would be ideal if we could provide a more consistent approach to bringing newcomers together and connecting them with the community.</li>
+<li><strong>Mentorship is hard to find:</strong> Although there have been previous attempts at mentorship programs, those have proven challenging to sustain. But <a href="https://www.linuxfoundation.org/hubfs/LF%20Research/LFX%20Mentorship%20in%20Open%20Source%20-%20Report.pdf?hsLang=en">research shows</a> that mentorship can make all the difference when it comes to retaining users and turning them into potential contributors and community members, especially when it comes to those from marginalized and underrepresented groups.</li>
+<li><strong>Installation process</strong> Ensuring that this process is as easy and straightforward as possible, and centering the experience of new users is something that we should continue to be mindful of. Because this will likely involve the php.net website, this is another potential overlap with the mission of the <a href="https://github.com/ThePHPF/SIG-ambassadors">Marketing Subgroup of the PHP Ambassadors</a> Special Interest Group.</li>
 </ul>
 
-<p>You might be surprised to see Derick Rethans’ name in the list above. After all, he was listed as a PHP Fellow when we announced the Foundation last year. Shortly after we launched the Foundation, Derick informed us of his desire to focus his work on developing and maintaining PHP's core and that he wanted to apply for sponsorship from the Foundation to make this happen. To avoid any conflicts of interest, Derick stepped down from his administrative role before he applied for sponsorship.</p>
+<p>These problems are not new and they aren't easy to solve, but one thing about the PHP community that I personally love is its dedication to sharing knowledge with new learners and helping newcomers find their way. This sense of community and support for newcomers is why many of us are still here (including myself!). Wouldn't it be great if we could come together and create a better and more consistent experience for newcomers to PHP?</p>
 
-<p>We are incredibly happy that these core developers have agreed to join the Foundation, and we are looking forward to the great things we can do together.</p>
+<p>If this is something that is of interest to you, we are hosting a kick-off meeting on <strong>Monday, August 24 at 13:00 UTC</strong>. To request an invite to this meeting, please register your interest using <a href="https://forms.gle/VNmijQm4gWjuDjnJA">this form</a>. Note: if you have already indicated your interest through this form, you do not need to submit it again.</p>
 
-<h3 id="code-of-conduct">Code of Conduct</h3>
-
-<p>All participants of the PHP Foundation including administration members and developers are expected to abide by the <a href="https://opencollective.com/redirect?url=https%3A%2F%2Fwww.contributor-covenant.org%2Fversion%2F2%2F1%2Fcode_of_conduct%2F">Code of Conduct</a>.</p>
-
-<p>To ensure enforcement of the Code of Conduct we are setting up a dedicated team. Tobias Nyholm <a href="https://github.com/Nyholm">@Nyholm</a>, who leads <a href="https://opencollective.com/redirect?url=https%3A%2F%2Fsymfony.com%2Fcare">Symfony’s CARE team</a>, will be responsible for assembling and running the Foundation’s CoC team. Welcome aboard, Tobias!</p>
-
-<h3 id="what%E2%80%99s-next">What’s next</h3>
-
-<p>Our main goal for the next month is to set up a proper communication and development process. We will conduct several meetings to discuss technical and organizational matters.</p>
-
-<p>Since the purpose of the Foundation is to train the next generation of internal developers, we want to emphasize maintenance and user-focused features to maximize our impact. As such, we will review the efforts and ensure the plans fall in line with such an agenda.</p>
-
-<p>We would also like to reduce the bus factor of PHP. So whenever possible, developers will be expected to update the <a href="https://opencollective.com/redirect?url=https%3A%2F%2Fwww.phpinternalsbook.com%2F">PHP Internals Book</a> to ensure that no knowledge is lost.</p>
-
-<p>On the administration side, we plan to work on increasing the transparency of our operations: to shed some light on the governance structure, discussions, and so on.</p>
-
-<h3 id="php-foundation-stands-with-ukraine-%F0%9F%87%BA%F0%9F%87%A6">PHP Foundation stands with Ukraine 🇺🇦</h3>
-
-<p>On February 24th, 2022, Vladimir Putin's Regime began an illegal war of aggression in Ukraine. There are no words to truly express our outrage at such disregard for human life.</p>
-
-<p>Many PHP developers have lived in or are living in Ukraine, and the PHP Foundation is supported by many backers from Ukraine, including sponsors <a href="https://opencollective.com/redirect?url=https%3A%2F%2Foroinc.com%2Flets-stop-the-war-together%2F">Oro, Inc.</a> and <a href="https://opencollective.com/redirect?url=https%3A%2F%2Fmacpaw.com%2F">MacPaw</a>.</p>
-
-<p>If you, like many in the PHP Foundation, are desperate to find a way to help, there are some organizations listed below that are working to provide humanitarian aid to people who are caught up in this war.</p>
-
-<p>We are proud that many of our sponsors stand with Ukraine too. Here are just a few examples:</p>
-
-<ul>
-<li><a href="https://opencollective.com/redirect?url=https%3A%2F%2Fsymfony.com%2Fblog%2Fsymfony-stands-with-ukraine">Symfony</a></li>
-<li><a href="https://opencollective.com/redirect?url=https%3A%2F%2Fwww.acquia.com%2Fblog%2Facquia-stands-ukraine">Acquia</a></li>
-<li><a href="https://opencollective.com/redirect?url=https%3A%2F%2Fblog.jetbrains.com%2Fblog%2F2022%2F03%2F11%2Fjetbrains-statement-on-ukraine%2F">JetBrains</a></li>
-<li><a href="https://opencollective.com/redirect?url=https%3A%2F%2Fwordpress.org%2Fnews%2F2022%2F03%2Fepisode-26-matt-mullenweg-on-ukraine-community-and-wordpress%2F">Automattic</a></li>
-<li><a href="https://github.com/composer/packagist/commit/86244a3695fcaaac9c5ba4257a4314eae1c6d981">Composer</a></li>
-<li><a href="https://twitter.com/Livesport_eu/status/1496925425821491208">Livesport.eu</a></li>
-<li><a href="https://opencollective.com/redirect?url=https%3A%2F%2Fwww.shopware.com%2Fen%2Fshopware-and-its-two-founders-support-caritas-international-aid-for-ukraine%2F">Shopware</a></li>
-</ul>
-
-<p>Please consider supporting the people of Ukraine. You can find more information on how to do so on the <a href="https://opencollective.com/redirect?url=https%3A%2F%2Fen.isupportukraine.eu%2F">I Support Ukraine</a> website.</p>
-
-<p>If you’d like to make a donation, consider <a href="https://opencollective.com/redirect?url=https%3A%2F%2Fwww.unicefusa.org%2Fwar-ukraine">UNICEF</a>, <a href="https://opencollective.com/redirect?url=https%3A%2F%2Fwww.peopleinneed.net%2Fdonate%2Fonce%3Famount%3D1000%26accountId%3D7">People in Need</a>, or any <a href="https://opencollective.com/redirect?url=https%3A%2F%2Fwww.globalcitizen.org%2Fen%2Fcontent%2Fways-to-help-ukraine-conflict%2F">other humanitarian organization</a> of your choice helping the people not only in Ukraine.</p>
-
-<p>If you are a PHP developer in need of support, reach out to us at social@thephp.foundation and we’ll do everything we can to help you.</p>
-
-<h3 id="thank-you-to-our-sponsors">Thank you to our sponsors</h3>
-
-<p>Lots of you have kindly donated to the PHP Foundation, and we are extremely grateful!</p>
-
-<p>We’d like to say a massive thanks to the following newly joined major sponsors for their very generous contributions:</p>
-
-<ul>
-<li><a href="https://opencollective.com/redirect?url=https%3A%2F%2Fpaycomonline.com%2F">Paycom</a></li>
-<li><a href="https://opencollective.com/redirect?url=https%3A%2F%2Fwww.ec-cube.net%2F">EC-CUBE</a></li>
-<li><a href="https://opencollective.com/redirect?url=https%3A%2F%2Fwww.cambiumlearning.com%2F">Cambium Learning, Inc.</a> (<a href="https://opencollective.com/redirect?url=https%3A%2F%2Fwww.learninga-z.com%2F">Learning A-Z</a>)</li>
-</ul>
-
-<p>And shout-out to everyone else who has contributed, we are truly grateful to you all – the PHP Foundation is all of us!</p>
-
-<p>A special mention goes to <a href="https://opencollective.com/redirect?url=https%3A%2F%2F1password.com%2F">1password</a> for <a href="https://github.com/1Password/1password-teams-open-source#the-php-foundation">providing us</a> with a free membership to ensure all of our sensitive data is stored and shared securely.</p>
-
-<p>That’s all for today. Follow us on Twitter <a href="https://twitter.com/thephpf">@ThePHPF</a> to get the latest updates from the Foundation.</p>
-
-<p>💙💛 ☮️ 🐘</p>
+<p>If you cannot attend this meeting, that's okay! You are welcome to join the #the-php-foundation channel in the <a href="https://discord.phpc.social/">#phpc Discord server</a> for access to this and the other Special Interest Group chats. We also have a <a href="https://github.com/ThePHPF/SIG-onboarding">GitHub repository</a> where you can connect asynchronously.</p>
 ]]></content>
         </entry>
             <entry>
-            <title type="html"><![CDATA[The PHP Foundation Update, January 2022]]></title>
-            <link href="/blog/2022/01/21/the-php-foundation-update-january-2022/"/>
-            <updated>2022-01-21T00:00:00+00:00</updated>
-            <id>/blog/2022/01/21/the-php-foundation-update-january-2022/</id>
-            <content type="html"><![CDATA[<p><code>&lt;?php echo 'Hello world!';</code></p>
+            <title type="html"><![CDATA[Quarterly Progress Report - Q2 2026]]></title>
+            <link href="https://thephp.foundation/blog/2026/07/21/quarterly-report-q2-2026/"/>
+            <updated>2026-07-21T00:00:00+00:00</updated>
+            <id>https://thephp.foundation/blog/2026/07/21/quarterly-report-q2-2026/</id>
+            <content type="html"><![CDATA[<p>Our <a href="https://thephp.foundation/structure/#Core%20Developers">team of core developers</a> works very hard to strengthen and improve the PHP language. In an effort to improve the way we communicate this work, from now on, we will be posting quarterly updates regarding their individual projects and efforts.</p>
 
-<p>In November, the PHP Foundation was launched publicly and we’ve seen enormous support from the community.
-Thanks to all of you who have already supported the initiative! We’re planning to update you about our workstream activities on a monthly basis, and this is our first update post.
-Let’s take a look at what we’ve been working on!</p>
+<p>Our core team consists of 13 people, distributed across 8 countries. Most of our contractors work part-time for The PHP Foundation and have other ventures aside from working on the PHP core. Also, this report is not meant to be a comprehensive list of everything our contractors shipped, but a high-level summary of their most impactful work.</p>
 
-<h3 id="the-first-round-of-applications-is-now-closed">The first round of applications is now closed</h3>
+<p>In addition to our regular efforts around sustaining PHP through routine tasks like code reviews, bug fixes, issue triage and other maintenance work that we expect from all our developers, we want to highlight these particular efforts:</p>
 
-<p>Since November, many developers have applied for sponsorship, and there were quite a few that we would be very happy to sponsor.</p>
+<h3 id="arnaud-le-blanc">Arnaud Le Blanc</h3>
 
-<p>We are discussing the details with applicants and planning the budget.
-In order to organize this correctly we need proper documents and agreements.
-The JetBrains legal department and OpenCollective staff are helping us to prepare the required paperwork.</p>
+<p>Arnaud worked out a general solution to two long-standing sources of engine bugs tied to error handlers and destructors, in collaboration with Ilija Tovilo (one of Arnaud's fixes builds on an earlier attempt made by him). The forthcoming RFC will add a fix for a related third bug source, all targeting a version after PHP 8.6. On the STF project, he's stepped back from I/O hooks and shifted with Jakub Zelenka to <a href="https://github.com/php/php-src/pull/22538">a dependency of hooks</a>, also targeting a version after PHP 8.6.</p>
 
-<p>We plan to complete the preparations and sign the necessary documents in January.
-After that, we will announce the list of the first batch of sponsored developers.</p>
+<h3 id="david-carlier">David Carlier</h3>
 
-<h3 id="how-we%E2%80%99re-making-decisions">How we’re making decisions</h3>
+<p>David shipped <a href="https://github.com/php/php-src/pull/21631"><code>AF_PACKET</code> raw buffer support</a> in PHP's sockets extension, so PHP can now work with low-level Linux packet sockets directly instead of shelling out or resorting to FFI. This PR closes a real gap with C, Python, Go, and Rust, and opens up native packet capture and injection for PHP. It's also safe by design, since like every other language it needs a privileged account (<code>CAP_NET_RAW/root</code>) to use, so it doesn't widen the attack surface for ordinary code.</p>
 
-<p>So far, we have held three administration meetings where we discussed the pressing issues.
-Each meeting and the decision-making process are documented in our organization on GitHub at <a href="https://github.com/thephpf">github.com/thephpf</a>.
-For now the details are hidden, but we would like to make these meetings and notes public at some point.</p>
+<h3 id="derick-rethans">Derick Rethans</h3>
 
-<p>In the next few months, we plan to hold biweekly meetings and work on the foundation’s governance, rules, and bylaws.</p>
+<p>Derick spent many hours investigating, trialing, and planning, and was able to complete a migration of the whole php.net infrastructure to a new CDN provider (more details on this are coming in a separate announcement).</p>
 
-<h3 id="shout-out-to-our-sponsors">Shout out to our sponsors</h3>
+<h3 id="gina-banyard">Gina Banyard</h3>
 
-<p>Many thanks to everyone who has donated to the PHP Foundation!</p>
+<p>Gina worked on <code>ext/phar</code> to cut unnecessary string allocations and improve its clarity, and investigated unifying PHP's type-checking code to remove redundant return-type checks (tied to her interface-only generic types proposal), both of which reduce duplication and improve performance and maintainability. She also explored replacing the <code>get_constructor()</code> object handler with an attribute, which would make constructors more predictable and could eventually let <code>new MyClass(...)</code> be used as a callable. This is a small but long-requested ergonomics win. In parallel, she's been preparing the mass deprecation RFC for PHP 8.6, investigating how often objects get treated as arrays, and keeping up with PR reviews and older bug fixes to prevent technical debt from piling up ahead of the next release. On top of the engineering work, she represented the project publicly: preparing and giving a talk at UNSOUND (her first academic conference), along with other conference talks and an opinion blog post, helping raise the project's visibility outside its usual community.</p>
 
-<p>In addition to the founding sponsors – <a href="https://www.jetbrains.com">JetBrains</a>, <a href="https://automattic.com">Automattic</a>, <a href="https://www.acquia.com">Acquia</a>, <a href="https://www.zend.com">Zend</a>, <a href="https://craftcms.com">Craft CMS</a>, <a href="https://laravel.com">Laravel</a>, <a href="https://symfony.com">Symfony</a>, <a href="https://tideways.com">Tideways</a>, <a href="https://www.prestashop.com/en">PrestaShop</a>, and <a href="https://packagist.com">Private Packagist</a> – we have a whole new group of major sponsors!</p>
+<h3 id="ilija-tovilo">Ilija Tovilo</h3>
 
-<p>A big thanks goes to the following companies who donated $10,000 or more:</p>
+<p>Ilija focused on ongoing security and regular issue handling and triage, work that keeps critical bugs from piling up and gets exploitable issues fixed before they reach users. He also continued work on the STF stream project, a core I/O abstraction where improvements pay off across many parts of the engine at once. In addition, he experimented with an 8-byte <code>zval</code> representation, which is a potentially high-leverage change, since <code>zval</code> is the fundamental value representation used throughout the engine, meaning a smaller size could meaningfully cut memory footprint and improve performance broadly. This is in the very early stages of experimentation. Finally, he drove improvements to <code>gcovr</code> accuracy from roughly 54% to 71%, giving the team a far more trustworthy picture of what's actually tested and better ability to catch under-tested code early.</p>
+
+<h3 id="jakub-zelenka">Jakub Zelenka</h3>
+
+<p>Jakub delivered several major new PHP core APIs, including a new stream errors API, an internal and userspace polling API (Io\Poll), and significant OpenSSL/TLS enhancements such as configurable session resumption, PSK support, and crypto status exposure. He also patched a security vulnerability in the FPM status endpoint and fixed a number of memory leaks and long-standing stream bugs. Together these changes strengthened PHP's streams, I/O, and TLS capabilities.</p>
+
+<h3 id="james-titcumb">James Titcumb</h3>
+
+<p>For the last few months, the PIE team has been hard at work on new features for the upcoming 1.5 release with several new key features. There's been a lot of background work to align the PIE interactions with Composer, which has allowed them to build several new requested features, including being able to install multiple extensions at once, adding a <code>--select</code> flag for unattended PIE installs for PHP projects, making re-installing an already installed extension a no-op, and being able to install locked extensions for a target PHP install with a new <code>pie install --from-lock</code> flag. Additionally, they have added support for some of the old PECL placeholder replacements, updated PIE to use the providers API, and kept up with maintenance of the 1.4.x series, bug-fixes, and security fixes for GitHub Security Advisories reported by the community.</p>
+
+<h3 id="joe-watkins">Joe Watkins</h3>
+
+<p>Joe's work has centered on experimenting with ideas that improve the PHP language and experience for contributors. His latest experiment was creating a multi-engine parser that would feed into a larger framework for mapping and connecting the PHP core code across repos, documentation, and eventually issues, PR comments, and other pieces of contextual information, which would help new contributors understand the context, evolution, and functionality of the PHP core codebase. This project was recently put on hold in lieu of other priorities, but is available on <a href="https://github.com/krakjoe/phathom">GitHub</a>.</p>
+
+<h3 id="m%C3%A1t%C3%A9-kocsis">Máté Kocsis</h3>
+
+<p>Thanks to Máté's work, the <a href="https://wiki.php.net/rfc/uri_followup">'Followup improvements for ext/uri' RFC</a> was accepted, and most of the work is already implemented. Once all changes land, it will become possible to build URIs and URLs via the new Builder classes, and some other, more advanced use cases will be better supported. Additionally, there is another RFC that has a fairly complete proposed implementation, which could revolutionize how query parameters are handled in PHP: <a href="https://wiki.php.net/rfc/query_params">https://wiki.php.net/rfc/query_params</a>. Voting is not yet open for this RFC but it should be open in the next quarter. Finally, Máté was also experimenting with UUIDs (UUID v7 more specifically) and created a proof-of-concept implementation for a new extension. Work on this will continue after the pending URI proposals are wrapped up.</p>
+
+<h3 id="saki-takamachi">Saki Takamachi</h3>
+
+<p>Saki was responsible for various bug fixes and code reviews and is currently out for family leave.</p>
+
+<h3 id="shivam-mathur">Shivam Mathur</h3>
+
+<p>Shivam added support for the new Visual Studio 2026 (VS18) toolchain across PHP's Windows build infrastructure and dependency stack, laying the groundwork the ecosystem needs ahead of PHP 8.6. He strengthened the security and stability of official Windows builds by updating and testing critical dependencies (OpenSSL, curl, SQLite, Apache, ICU, and libssh2), effectively closing off known vulnerabilities that could otherwise affect every Windows install. Shivam also resolved Windows-specific PGO and ZTS crashes, directly improving reliability for Windows users on currently supported versions. And lastly, he also maintained and improved php-windows-builder, keeping Windows binaries flowing for new PECL extension releases and keeping the platform from falling behind Linux/macOS in build support.</p>
+
+<h3 id="volker-dusch">Volker Dusch</h3>
+
+<p>Volker founded the <a href="https://thephp.foundation/blog/2026/05/18/announcing-ecosystem-security-team/">PHP Ecosystem Security Team</a>, a new effort to help PHP project maintainers find, fix, and handle security vulnerabilities. This is important because many maintainers, especially of smaller projects, lack the time or expertise to catch these issues themselves, leaving gaps that affect the wider ecosystem. Toward that end, he scanned over 500 of the most-used Composer packages and nearly every major framework, sharing 100+ fixes directly with maintainers, which translates into concrete, shipped security improvements across a large swath of the PHP ecosystem rather than just one project. He also worked alongside maintainers to help grow the team and support projects through specific security incidents (projects with a security need are encouraged to reach out).</p>
+
+<h3 id="alexandre-daubois">Alexandre Daubois</h3>
+
+<p>Our 13th contractor, Alexandre Daubois, is brand new to the team, so we won't have updates to share until the next quarterly report.</p>
+
+<h3 id="the-php-foundation-leadership">The PHP Foundation Leadership</h3>
+
+<p>In addition to our team of developers, The Foundation's Executive Director (that's me!) and Director of Fundraising (Ben Marks) have also been hard at work making progress on our goals. Q2 focused on getting a lay of the land through a listening tour, creating and kicking off implementation of a strategy plan for the rest of the year, and onboarding new contractors, sponsors, and Board members. We launched the PHP Ambassador program, quarterly Advisory Board meetings, the State of PHP Survey, revived the monthly newsletter, and began publishing <a href="https://github.com/ThePHPF/foundation/tree/main/board%20minutes">minutes</a> from the Governing Board meetings. We continue to focus on increasing Foundation transparency and collaboration with the community, and expanding our mission to include other initiatives besides PHP core language development.</p>
+
+<hr />
+
+<p>We are happy to share these updates with you, and if you have any questions about what any of our contractors are working on, you can connect with us in The PHP Foundation Discord channel on the <a href="https://phpc.chat/">PHPC server</a>.</p>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Welcoming Alexandre Daubois to The PHP Foundation]]></title>
+            <link href="https://thephp.foundation/blog/2026/07/14/welcoming-alexandre-daubois/"/>
+            <updated>2026-07-14T00:00:00+00:00</updated>
+            <id>https://thephp.foundation/blog/2026/07/14/welcoming-alexandre-daubois/</id>
+            <content type="html"><![CDATA[<p>As you know, the main objective of The PHP Foundation’s mission is the sustainability of the PHP language, and a large part of that mission is focused on PHP core maintenance tasks. Included in this maintenance body of work are tasks such as issue triage, code reviews, and bug fixes. We take this responsibility very seriously, especially when it comes to security.</p>
+
+<p>In recent months, there has been a marked increase in the number of security reports to <a href="https://github.com/php/php-src">php-src</a>, due to the increased availability of AI tools and the ease with which these reports can be generated. Some of these reports are not valid security issues or are basic duplicates of previously filed reports. But even so, every one of these reports must be triaged and validated, then if deemed valid, they must be classified, fixed, reviewed, and merged. There is a very small team that currently handles these reports, and it is becoming more difficult to not only keep up with the influx, but to address issues that already exist.</p>
+
+<p><img src="/assets/post-images/2026/alexandre-daubois/alexandre-daubois.jpg" width="300" alt="photo of alexandre daubois giving a talk" class="mb-4 sm:mr-4 sm:float-left"/>As a result, we are thrilled to add <a href="https://www.linkedin.com/in/alexandre-daubois/?locale=en">Alexandre Daubois</a> to our team of contracted developers, focused on security. Alexandre will be spending a few hours a week helping with triage and the handling and fixing of incoming security reports.</p>
+
+<p>As the current CTO of <a href="https://Les-Tilleuls.coop">Les-Tilleuls.coop</a>, Alexandre brings a wealth of experience in addressing and fixing security issues. He has deep knowledge of Symfony, FrankenPHP, PHP core, and Scrutineer, and has already been instrumental in implementing recommendations from The PHP Foundation’s Ecosystem Security Team. We are confident that his contributions will make a huge impact in our ability to process incoming reports and effectively harden the PHP language.</p>
+
+<p>Please join us in welcoming Alexandre to The PHP Foundation team!</p>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Meet TYPO3: Supporting the Open-Source Foundation of Its Ecosystem]]></title>
+            <link href="https://thephp.foundation/blog/2026/07/01/meet-typo3/"/>
+            <updated>2026-07-01T00:00:00+00:00</updated>
+            <id>https://thephp.foundation/blog/2026/07/01/meet-typo3/</id>
+            <content type="html"><![CDATA[<p><a href="https://typo3.org/">TYPO3</a> has joined the PHP Foundation as a Silver Sponsor, extending its commitment to the open-source technologies and communities on which its own ecosystem is built.</p>
+
+<p>TYPO3 is an open-source enterprise content management system built with open web standards. It provides a robust feature set for scalable, multisite, multilingual, and highly connected digital platforms. TYPO3 is also a verified Digital Public Good and part of the Open Website Alliance through the TYPO3 Association.</p>
+
+<h3 id="php%3A-the-foundation-behind-typo3">PHP: the foundation behind TYPO3</h3>
+
+<p>PHP has been the technological foundation of TYPO3 for more than two decades. It supports the CMS, its extension ecosystem, and the digital platforms built and maintained by TYPO3 agencies, contributors, and users worldwide.</p>
+
+<p>TYPO3 also builds on other established open-source technologies, including Symfony components. Its support for the PHP Foundation follows the same principle as its financial backing of Symfony 8.1 and its sponsorship of PHPverse online events: projects that benefit from shared open-source infrastructure also have a role in sustaining it.
+As a Silver Sponsor, TYPO3 contributes financially to the PHP Foundation’s work to support the continued development, maintenance, security, and stability of PHP.</p>
+
+<h3 id="giving-back-to-the-php-ecosystem">Giving back to the PHP ecosystem</h3>
+
+<blockquote>
+  <p>“We're proud and grateful to support the PHP Foundation - because without PHP, there is no TYPO3. Its long-term health matters to our project, our community, and everyone building on top of TYPO3. By contributing as a Silver Sponsor, we are supporting the shared infrastructure we rely on every day.”
+  --Frank Nägler, CTO, TYPO3 Company</p>
+</blockquote>
+
+<p>As a Silver Sponsor, TYPO3 is putting support behind the language that powers its CMS and many other projects across the open-source web. This sponsorship reflects a shared interest in keeping PHP secure, stable, and ready for what comes next.</p>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Maintaining PHP Build infrastructure for Windows: Tooling for builds and security updates]]></title>
+            <link href="https://thephp.foundation/blog/2026/06/26/maintaining-php-build-infrastructure-for-windows-tooling-for-builds-and-security-updates/"/>
+            <updated>2026-06-26T00:00:00+00:00</updated>
+            <id>https://thephp.foundation/blog/2026/06/26/maintaining-php-build-infrastructure-for-windows-tooling-for-builds-and-security-updates/</id>
+            <content type="html"><![CDATA[<p>Most PHP developers never think about how PHP is built. They download it or install it using a command or a pre-built image and get started with their work. That is exactly how it should feel. A build system is doing its job when the final result looks great and works as expected.</p>
+
+<p>Behind every official PHP for Windows release is a lot of infrastructure: compilers, SDKs, dependency libraries, extension compatibility, CI pipelines, and security updates that keep the supported PHP versions working.</p>
+
+<p>As part of my work for The PHP Foundation, the focus has been on the Windows side of PHP: maintaining and improving the build infrastructure, updating dependencies, supporting extension builds, and making the process more reliable for current and future PHP releases.</p>
+
+<p>This post is a look at that work, why it matters, and what goes into keeping PHP healthy on Windows.</p>
+
+<h2 id="why-windows-support-still-matters">Why Windows support still matters</h2>
+
+<p>PHP is widely used on Linux, as the most common use case is running web applications, but Windows support remains important for several reasons.</p>
+
+<p>Many developers use Windows as their local development environment, and many companies run PHP applications on Windows servers. A lot of users depend on it for local testing environments, CLI tooling, and extensions that must work reliably on Windows. As per the <a href="https://survey.stackoverflow.co/2025/technology#1-computer-operating-systems">Stack Overflow annual developer survey in 2025</a> close to 50% of respondents use Windows for development.</p>
+
+<p>Official PHP builds for Windows matter because they provide a trusted baseline and are part of the PHP project’s release process.</p>
+
+<p>That means Windows support is not only about producing the final PHP build. It is about maintaining the full chain that makes a reliable PHP runtime possible.</p>
+
+<h2 id="the-build-system-is-now-a-toolchain">The build system is now a toolchain</h2>
+
+<p>Building PHP on Windows is very different from building PHP on Unix-like systems.</p>
+
+<p>On Linux and macOS, building PHP usually depends on package managers for dependencies and easy-to-use popular build toolchains. On Windows, PHP uses a separate build system built around MSVC, Windows SDK that handles various MSVC versions, custom build scripts, and custom prebuilt dependencies with patches specific to PHP.</p>
+
+<p>A PHP Windows build needs to know:</p>
 
 <ul>
-<li><a href="https://www.rakus.co.jp/">RAKUS</a></li>
-<li><a href="https://www.livesport.eu/">Livesport s.r.o.</a></li>
-<li><a href="https://op.gg/">OP.GG</a></li>
-<li><a href="https://polcode.com">Polcode</a></li>
-<li><a href="https://www.shopware.com">Shopware</a></li>
-<li><a href="https://binc.jp">BASE, Inc.</a></li>
-<li><a href="https://aternos.org">Aternos GmbH</a></li>
-<li><a href="https://digitalscholar.org">Digital Scholar</a></li>
-<li><a href="https://en.ardennes-etape.be">Ardennes-étape</a></li>
+<li>Which Visual Studio toolset to use</li>
+<li>Which Windows SDK to target</li>
+<li>Which dependency packages are available</li>
+<li>Which library versions are compatible with each PHP branch</li>
+<li>Whether a build is x64, x86, thread-safe, non-thread-safe, debug, or release</li>
 </ul>
 
-<p>Thank you to everyone else who has contributed – the PHP Foundation is all of us!</p>
+<p>A major part of my work has been consolidating this into a modern toolchain: <a href="https://github.com/php/php-windows-builder">php/php-windows-builder</a>.</p>
 
-<p>That’s all for today. Follow us on Twitter <a href="https://twitter.com/ThePHPF">@ThePHPF</a> to get the latest updates from the foundation.</p>
+<h3 id="php-extension-builds-for-windows">PHP extension builds for Windows</h3>
 
-<p>💖🐘</p>
+<p>We started with the purpose of making it easier to build PHP extensions on Windows. The goal was giving extension authors a path to produce builds that are compatible with the newer <a href="https://github.com/php/pie">PIE</a> direction. But because this new way of distribution for PHP’s extensions using PIE is still evolving, we also revived Windows builds for extension releases on PECL. As part of that, we have released builds for more than 100 actively maintained extensions.</p>
 
-<p>Feel free to contact us at <a href="&#109;&#x61;i&#108;&#x74;&#111;&#58;&#x63;&#111;&#x6e;&#x74;&#97;&#x63;t&#64;&#x74;&#104;&#101;&#x70;&#104;&#x70;&#x2e;&#102;&#x6f;&#x75;&#110;&#x64;a&#116;&#x69;&#111;&#110;">contact@thephp.foundation</a>.</p>
+<p>That matters because Windows extension builds have historically been challenging for maintainers. Extension authors often do not have the full Windows build environment locally, and many contributors are more familiar with Linux-based workflows. A builder with a unified interface with known inputs gives the ecosystem a common place to test, debug, and improve Windows builds.</p>
+
+<pre><code class="yaml">- name: Build the extension
+  uses: php/php-windows-builder/extension@v1
+  with:
+    extension-url: https://github.com/xdebug/xdebug
+    extension-ref: '3.5.3'
+    php-version: '8.5'
+    ts: nts
+    arch: x64
+    args: --with-xdebug
+    libs: zlib
+</code></pre>
+
+<p>This is not only about convenience. It changes what is possible. For most extensions, building for Windows is as easy as copying one of the <a href="https://github.com/php/php-windows-builder/tree/master/examples">example workflows</a> we have.</p>
+
+<h3 id="automating-windows-release-builds">Automating Windows release builds</h3>
+
+<p>In addition to improving support for building PHP extensions, we also improved how the PHP runtime is built and maintained on Windows. We now have automated workflows in <a href="https://github.com/php/php-windows-builder">php/php-windows-builder</a> that build PHP on new tags in <a href="https://github.com/php/php-src">php/php-src</a>, run tests, deploy them to the <a href="https://www.php.net/downloads.php?os=windows">downloads server</a>, and make them available on the PHP website. This is a huge improvement on what used to be a manual process with delays, where the builds were run manually by one person in the Windows team and tested after publishing.</p>
+
+<p><img src="/assets/post-images/2026/windows-build-infrastructure/php-windows-release-flow.svg" alt="Automated PHP for Windows release flow" /></p>
+
+<h3 id="dependency-updates-and-testing">Dependency updates and testing</h3>
+
+<p>As part of the PHP build infrastructure improvements, we also created a test bench workflow. It allows us to build PHP with unpublished builds of PHP dependencies directly from GitHub workflow artifacts rather than fetching them from the PHP servers. That allows us to test dependency updates.</p>
+
+<p>Before this test-bench infrastructure existed, some dependency updates were delayed or avoided because testing them properly on Windows was too slow, too manual, or too challenging. With a dedicated builder and test bench, dependency updates can be tested more quickly across PHP branches and configurations. That helps us move faster on both compatibility and security work.</p>
+
+<p>PHP 8.0 through PHP 8.3 use the Visual Studio 2019 toolset, while newer versions such as PHP 8.4 and PHP 8.5 use the Visual Studio 2022 toolset. PHP 8.6 will use the Visual Studio 2026 toolset. These transitions sound simple, but in practice they affect compiler flags, dependency builds, extension compatibility, CI base images, and long-term support decisions.</p>
+
+<p>Keeping this working means constantly testing combinations of PHP branches, Visual Studio versions, and dependency packages. <a href="https://github.com/php/php-windows-builder">php/php-windows-builder</a> gives us a structured way to do that instead of relying on one-off manual builds.</p>
+
+<h2 id="security-work%3A-cves%2C-dependency-updates%2C-and-backported-fixes">Security work: CVEs, dependency updates, and backported fixes</h2>
+
+<p>A big part of maintaining PHP for Windows is security work.</p>
+
+<p>That often means updating the dependency libraries that PHP and its extensions rely on when they receive CVE fixes or when new features demand it. These include libraries such as libcurl, OpenSSL, ICU, SQLite, libxml2, libjpeg, and more than 40 others.</p>
+
+<p>When one of these libraries fixes a vulnerability, the Windows dependency stack has to be reviewed, rebuilt, and tested. The work is not as simple as bumping a version number.</p>
+
+<p>A new dependency release can change ABI behavior, remove APIs, require another dependency to be rebuilt, expose new compiler warnings, or break an extension that used to compile cleanly.</p>
+
+<p>For example, updating OpenSSL requires rebuilding curl and other libraries that depend on it. Updating ICU can introduce MSVC warnings or header-level changes that affect the <code>intl</code> extension. Updating Apache has to be evaluated carefully because PHP’s Apache module needs to remain compatible with the wider Windows ecosystem, including users running third-party installers <a href="https://mariadb.org/xampp-needs-more-apache-friends/">lacking maintainers</a>, but still have a large user-base.</p>
+
+<p>There is also backporting work. Sometimes the safest path for a supported PHP branch is not to move an entire dependency stack forward, but to apply or adapt targeted security patches. That means reviewing upstream fixes, checking whether they apply cleanly to the version used by PHP for Windows, rebuilding the affected library, and validating that the patched build remains compatible with PHP and its extensions.</p>
+
+<p>This balance matters. We want users to receive security fixes quickly, but we also need to avoid introducing regressions into supported PHP releases. Security maintenance on Windows is therefore a careful process of tracking CVEs, reviewing upstream changes, rebuilding dependencies, backporting fixes where appropriate, and validating the result through PHP’s test suites and real extension builds.</p>
+
+<p>This is one of the less visible parts of the work, but also one of the most important. A secure PHP runtime depends not only on PHP source code but also on the native libraries that are shipped with it.</p>
+
+<p><img src="/assets/post-images/2026/windows-build-infrastructure/php-85-cve-bin-tool-findings.svg" alt="Known CVEs detected in PHP 8.5 Windows builds" /></p>
+
+<p>As part of this process, we updated these dependencies addressing a number of security issues reported for them over the last year.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Dependency</th>
+  <th>Old version</th>
+  <th>Updated version</th>
+  <th>Security issues resolved</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Apache</td>
+  <td>2.4.43</td>
+  <td>2.4.68</td>
+  <td>CVE-2026-49975, CVE-2026-48913, CVE-2026-44631, CVE-2026-44186, CVE-2026-44185, CVE-2026-44119, CVE-2026-43951, CVE-2026-42536, CVE-2026-42535, CVE-2026-34356, CVE-2026-34355, CVE-2026-29170, CVE-2026-29167, CVE-2026-23918, CVE-2026-24072, CVE-2026-28780, CVE-2026-29168, CVE-2026-29169, CVE-2026-33006, CVE-2026-33007, CVE-2026-33523, CVE-2026-33857, CVE-2026-34032, CVE-2026-34059, CVE-2025-49630, CVE-2025-55753, CVE-2025-58098, CVE-2025-59775, CVE-2025-65082, CVE-2025-66200, CVE-2025-54090, CVE-2024-42516, CVE-2024-43204, CVE-2024-43394, CVE-2024-47252, CVE-2025-23048, CVE-2025-49812</td>
+</tr>
+<tr>
+  <td>Firebird client</td>
+  <td>3.0.6</td>
+  <td>3.0.14</td>
+  <td>CVE-2025-54989</td>
+</tr>
+<tr>
+  <td>FreeType</td>
+  <td>2.11.1</td>
+  <td>2.14.3</td>
+  <td>CVE-2022-27404, CVE-2022-27405, CVE-2022-27406, CVE-2025-27363</td>
+</tr>
+<tr>
+  <td>libavif</td>
+  <td>0.9.0</td>
+  <td>1.4.2</td>
+  <td>CVE-2025-48174, CVE-2025-48175, CVE-2023-6350, CVE-2023-6351, CVE-2023-6704</td>
+</tr>
+<tr>
+  <td>libcurl</td>
+  <td>8.17.0</td>
+  <td>8.20.0</td>
+  <td>CVE-2025-15224, CVE-2025-15079, CVE-2025-14819, CVE-2026-1965, CVE-2026-3783, CVE-2026-3784, CVE-2026-3805, CVE-2026-4873, CVE-2026-5545, CVE-2026-5773, CVE-2026-6253, CVE-2026-6276, CVE-2026-6429, CVE-2026-7009, CVE-2026-7168</td>
+</tr>
+<tr>
+  <td>liblzma / XZ</td>
+  <td>5.8.2</td>
+  <td>5.8.3</td>
+  <td>CVE-2026-34743</td>
+</tr>
+<tr>
+  <td>libpng</td>
+  <td>1.6.34</td>
+  <td>1.6.56</td>
+  <td>CVE-2026-33416, CVE-2026-33636</td>
+</tr>
+<tr>
+  <td>PostgreSQL client</td>
+  <td>14.18/16.9</td>
+  <td>14.22/16.13</td>
+  <td>CVE-2025-8713, CVE-2025-8714, CVE-2025-8715, CVE-2025-12817, CVE-2025-12818, CVE-2026-2003, CVE-2026-2004, CVE-2026-2005, CVE-2026-2006</td>
+</tr>
+<tr>
+  <td>Cyrus SASL</td>
+  <td>2.1.27</td>
+  <td>2.1.28</td>
+  <td>CVE-2022-24407</td>
+</tr>
+<tr>
+  <td>libsodium</td>
+  <td>1.0.18</td>
+  <td>1.0.22</td>
+  <td>CVE-2025-69277</td>
+</tr>
+<tr>
+  <td>libssh2</td>
+  <td>1.11.1</td>
+  <td>1.11.1</td>
+  <td>Patch for CVE-2026-7598 was backported</td>
+</tr>
+<tr>
+  <td>libxml2</td>
+  <td>2.10.4</td>
+  <td>2.10.4</td>
+  <td>Patches for the following CVEs were backported - CVE-2026-0989, CVE-2026-0990, CVE-2026-0992, CVE-2026-1757, CVE-2025-7425</td>
+</tr>
+<tr>
+  <td>libxslt</td>
+  <td>1.1.37</td>
+  <td>1.1.43</td>
+  <td>CVE-2024-55549, CVE-2025-24855, CVE-2025-11731, CVE-2025-7424, CVE-2025-10911</td>
+</tr>
+<tr>
+  <td>nghttp2</td>
+  <td>1.64.0</td>
+  <td>1.69.0</td>
+  <td>CVE-2026-27135</td>
+</tr>
+<tr>
+  <td>OpenSSL</td>
+  <td>3.0.18</td>
+  <td>3.0.21/3.5.7</td>
+  <td>CVE-2026-45447, CVE-2026-34182, CVE-2026-34183, CVE-2026-42764, CVE-2026-45445, CVE-2026-7383, CVE-2026-9076, CVE-2026-34180, CVE-2026-34181, CVE-2026-42766, CVE-2026-42767, CVE-2026-42768, CVE-2026-42769, CVE-2026-42770, CVE-2026-45446, CVE-2026-31790, CVE-2026-28387, CVE-2026-28388, CVE-2026-35188, CVE-2026-42765, CVE-2026-42771, CVE-2026-28386, CVE-2026-28389, CVE-2026-28390, CVE-2026-31789</td>
+</tr>
+<tr>
+  <td>SQLite</td>
+  <td>3.39.2</td>
+  <td>3.53.2</td>
+  <td>CVE-2025-7709, CVE-2025-70873, CVE-2025-7458.</td>
+</tr>
+<tr>
+  <td>zlib</td>
+  <td>1.2.12</td>
+  <td>1.3.2</td>
+  <td>CVE-2022-37434</td>
+</tr>
+</tbody>
+</table>
+
+<p>We also refreshed these dependencies to newer releases for bug fixes and new features.</p>
+
+<table>
+<thead>
+<tr>
+  <th align="left">Dependency</th>
+  <th align="left">Old version</th>
+  <th align="left">Updated version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">GLib</td>
+  <td align="left">2.53.3</td>
+  <td align="left">2.88.1</td>
+</tr>
+<tr>
+  <td align="left">libwebp</td>
+  <td align="left">1.3.2</td>
+  <td align="left">1.6.0</td>
+</tr>
+<tr>
+  <td align="left">libjpeg-turbo</td>
+  <td align="left">2.1.0</td>
+  <td align="left">3.1.4</td>
+</tr>
+<tr>
+  <td align="left">LMDB</td>
+  <td align="left">0.9.22</td>
+  <td align="left">0.9.35</td>
+</tr>
+<tr>
+  <td align="left">libiconv</td>
+  <td align="left">1.17</td>
+  <td align="left">1.19</td>
+</tr>
+<tr>
+  <td align="left">libintl</td>
+  <td align="left">0.18.3</td>
+  <td align="left">1.0</td>
+</tr>
+<tr>
+  <td align="left">libffi</td>
+  <td align="left">3.3-4</td>
+  <td align="left">3.5.2</td>
+</tr>
+<tr>
+  <td align="left">Oniguruma</td>
+  <td align="left">6.9.8</td>
+  <td align="left">6.9.10</td>
+</tr>
+<tr>
+  <td align="left">libenchant2</td>
+  <td align="left">2.2.8</td>
+  <td align="left">2.8.16</td>
+</tr>
+<tr>
+  <td align="left">OpenLDAP</td>
+  <td align="left">2.4.47</td>
+  <td align="left">2.6.13</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="ci-has-become-essential">CI has become essential</h2>
+
+<p>Modern PHP Windows work depends heavily on CI.</p>
+
+<p>It is not enough to build PHP once locally and release it. We need repeatable testing across branches, architectures, dependency versions, and runtime combinations.</p>
+
+<p>As part of <a href="https://github.com/php/php-windows-builder">php/php-windows-builder</a>, we now have a GitHub Actions-based approach to building PHP and its extensions; this is an improvement from the early days of building these on the Windows machine provided by Microsoft.</p>
+
+<h2 id="preparing-for-the-future">Preparing for the future</h2>
+
+<p>Windows support also has to look ahead.</p>
+
+<p>One major area is architecture support. Historically, PHP for Windows has shipped x86 and x64 builds. But the value of x86 support continues to decrease as modern Windows systems are overwhelmingly 64-bit, while interest in ARM64 is growing.</p>
+
+<p>That creates an important long-term question: what should the official PHP Windows build matrix look like in the future?</p>
+
+<p>Dropping x86 and investing in ARM64 may make more sense for future versions. But that kind of decision cannot be made casually. It requires understanding who still depends on x86, what compatibility is actually being preserved, and what new users would benefit from ARM64 builds.</p>
+
+<p>Part of the job is to make these transitions possible before they become urgent.</p>
+
+<h2 id="in-closing">In closing</h2>
+
+<p>Open source maintenance is invisible by design. If everything goes well, users do not notice that a dependency was rebuilt, a compiler issue was fixed, an extension was patched, or a CI workflow was improved. They just download PHP and continue working.</p>
+
+<p>That is the goal.</p>
+
+<p>But it is also why it is worth talking about this work occasionally. The reliability of a project like PHP depends on many layers of maintenance that happen outside the spotlight.</p>
+
+<p>The Windows side of PHP has its own set of challenges, and continuing to invest in it helps keep PHP accessible to more developers, more environments, and more use cases.</p>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[One Month of Ecosystem Security Engineering]]></title>
+            <link href="https://thephp.foundation/blog/2026/06/23/one-month-of-ecosystem-security-engineering/"/>
+            <updated>2026-06-23T00:00:00+00:00</updated>
+            <id>https://thephp.foundation/blog/2026/06/23/one-month-of-ecosystem-security-engineering/</id>
+            <content type="html"><![CDATA[<p>Last month I shared with you that the PHP Foundation secured a <a href="https://thephp.foundation/blog/2026/05/18/announcing-ecosystem-security-team/">grant by Alpha-Omega through the Linux Foundation</a> to help improve the security of the PHP open source ecosystem, and that it is forming a new Ecosystem Security Team. Today I want to update you on the progress so far.</p>
+
+<p>After a brief set-up period, I jumped into three main activities:</p>
+
+<ul>
+<li>assessing PHP community members' most pressing needs</li>
+<li>assembling a team of volunteers to help</li>
+<li>applying the resources granted to scan PHP ecosystem projects</li>
+</ul>
+
+<p>Setup included getting started with building collaborative toolchains, ensuring access to scanning budgets and models, defining our metrics for reporting, and identifying effective ways to distribute security vulnerability findings and to support maintainers.</p>
+
+<p>So far we talked to 35 project maintainers about our project scanning efforts and the security concerns they have. We shared hundreds of potential security vulnerability findings, leading to nearly a hundred publicly available fixes across the ecosystem already, and many great and useful conversations.</p>
+
+<p>Additionally there were mass fixes of the same finding across many repositories. For example, in one case, we had around 200 repositories apply the same fix to their GitHub Actions as they are managed via a central template. I didn’t want to inflate the numbers so these instances are counted as a single fix.</p>
+
+<p>In total, we scanned and rescanned over 300 of the most downloaded Composer packages and nearly all big frameworks. We got in touch with the respective maintainers or found people to jump in and help address security vulnerabilities where that was needed.</p>
+
+<p>I want to extend a personal thank you to <a href="https://github.com/grahamcampbell">Graham Campbell</a>, who has been very helpful in getting me started with ideas and initial issue validation in the first couple of days of my new role and who has continued to be responsive and helpful with solving issues in other projects.</p>
+
+<h2 id="current-efforts">Current efforts</h2>
+
+<p>Project scanning for security vulnerabilities continues at a steady pace to make the most use of the resources we've been provided with. We do not only search for vulnerabilities, but also help triage, reproduce issues, help with impact analysis, and where necessary supply fixes by using our access to AI models and their extended “Cyber” capabilities.</p>
+
+<p>I will continue to talk to everyone who approaches me while providing a steady flow of public-facing communication about our efforts.</p>
+
+<p>All maintainers who approached me so far were kind enough to offer to validate the generated findings themselves. I was able to focus primarily on generating reproducers and letting the experts figure out whether a particular finding represents a security issue, a bugfix, or an invalid report. The maintainers in these cases were handling their own reporting and disclosure on their own terms and in a way that fits their timeline.</p>
+
+<p>I’m personally delighted by the great community response, both quantitatively and qualitatively: Nearly everyone has been supportive and I encountered only one negative maintainer interaction and one person we are still looking to get in touch with. I couldn’t be happier with the maturity, readiness and friendliness of the wider community. I didn’t expect anything else from PHP, but it’s great to be proven right.</p>
+
+<h3 id="shared-tooling%3A-scrutineer">Shared tooling: Scrutineer</h3>
+
+<p>When scanning many projects, we face challenges: Getting reproducible and reliable outputs, avoiding false positives, and using our resources effectively without duplicating work, all while allowing each person scanning to run multiple agents in parallel without human interaction during the initial scanning process. Security analysis needs to be performed in isolated containerized environments that keep the infrastructure we use for scanning secure.</p>
+
+<p>To pool our efforts, we are working with the Ecosystem Security Engineers from other languages and the Team at Alpha-Omega on shared tooling for this purpose. Specifically we're collaborating on <a href="https://github.com/alpha-omega-security/scrutineer">Scrutineer</a>. I want to give a special shout out to <a href="https://github.com/alexandre-daubois">Alexandre Daubois</a> from <a href="https://les-tilleuls.coop">Les-Tilleuls.coop</a>. His contributions to Scrutineer have been very valuable in enabling more people to effectively scan PHP projects.</p>
+
+<p>Scrutineer enables more structured results and an easier reporting process. It also helps to let people with access to different, otherwise unavailable, AI models, or with access to more resource capacity, scan projects on our behalf. Using Scrutineer we can tailor the containers used for analysis towards the PHP ecosystem to improve the quality of scanning results through tooling to create and validate reproducers. The report quality would be drastically lower and require more clean-up work without effective automated feedback loops.</p>
+
+<h3 id="helping-projects-with-individual-approaches">Helping projects with individual approaches</h3>
+
+<p>We help projects and maintainers digest reports, create reproducers, deduplicate security vulnerability findings, and suggest and validate fixes.</p>
+
+<p>When I accepted my new role, I was unsure how many projects would reach out for help with these tasks. I've received feedback that the quality of reports maintainers are receiving has gone up significantly in the last couple of months. So I've not received many requests to assist with processing reports and proposed fixes. Many maintainers report that they use their own coding agents to validate and reproduce received security vulnerability findings effectively. But for some more complex issues, currently available AI models cannot help or refuse to help with working on an exploit for a potential vulnerability. In these cases, I can be of help.</p>
+
+<p>Sometimes, the automated scanning doesn’t produce clear results or the threat modeling or attack vectors are not clear enough. In these cases, I spend time with each project to better understand what the AI models should be assessing and steer them in that direction.</p>
+
+<p>A special mention here is the PHP project itself: Many people like to try their new security tools on PHP, due to its popularity. The inherent complexity of a programming language runtime results in significantly lower quality results from agentic security approaches. The reports the PHP project receives are harder to digest than they are in userland PHP libraries with a clearer threat model and attack surface.</p>
+
+<p>I was not yet able to help PHP itself much so far, due to time constraints. I intend to work on core PHP a lot more in the coming months. The communication with the PHP core developer team is great and I’m eager to get properly started and see where I can help them.</p>
+
+<h3 id="assembling-a-team">Assembling a team</h3>
+
+<p>I was delighted to see that the PHP Foundation is launching <a href="https://thephp.foundation/blog/2026/06/11/integrating-community-feedback-into-foundation-strategy-part2/#community-special-interest-groups">Community Special Interest Groups</a>. One of them is the Ecosystem Security Team, which the PHP Foundation wishes to sustain far beyond the 6 months of the initial grant funding, so I've begun to assemble a team around these security and maintainer support efforts.</p>
+
+<p>If you want to reach out and talk with like-minded people about security, you can find a couple of us in the #ecosystem-security channel on the <a href="https://discord.com/invite/RYajXKxuuK">phpc Discord</a>. The <a href="https://phpcommunity.org">PHP Community Foundation</a> was kind enough to create a channel for us and #the-php-foundation in general. I’m “@edorian” on there, if you want to say hi.</p>
+
+<p>For sensitive topics, you can always <a href="https://thephp.foundation/blog/2026/05/18/announcing-ecosystem-security-team/#:~:text=Get%20in%20touch%20via%20email%3A%20volker%40thephp.foundation.">get in touch</a> with me directly.</p>
+
+<p>Next to Alexandre, who I already mentioned above, a name I’ve come across a lot when talking to maintainers was <a href="https://github.com/iliaal">Ilia Alshanetsky</a>. Ilia has been doing a lot of independent work and I asked him to join the Ecosystem Security Team so we can better coordinate our efforts.</p>
+
+<h2 id="looking-ahead">Looking ahead</h2>
+
+<p>The goals I set myself for the next month are:</p>
+
+<ul>
+<li>Scan another 250 projects and report all collected findings</li>
+<li>Perform a dedicated, deeper analysis of core projects and libraries</li>
+<li>Spend more time helping out with php-src and PHP Extensions issues</li>
+</ul>
+
+<p>I will continue to be available to help any project maintainers who reach out.</p>
+
+<h3 id="get-in-touch">Get in touch</h3>
+
+<p>To repeat what was already mentioned above: We have capacity to scan and help more maintainers.</p>
+
+<p>Discord: <a href="https://discord.com/channels/356354025865740288/1507370983013744681">#ecosystem-security</a> on the #phpc community server <a href="https://discord.com/invite/RYajXKxuuK">(Invite)</a></p>
+
+<p>Email: <a href="&#x6d;&#97;&#x69;&#108;&#x74;&#x6f;&#58;&#x76;&#111;&#x6c;&#x6b;&#101;&#x72;&#64;&#x74;&#x68;&#101;&#x70;&#104;&#x70;&#x2e;&#102;&#x6f;&#117;&#x6e;&#x64;&#97;&#x74;&#105;&#x6f;&#x6e;">volker@thephp.foundation</a></p>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[The PHP Ambassador Program is Open]]></title>
+            <link href="https://thephp.foundation/blog/2026/06/19/the-php-ambassador-program-is-open/"/>
+            <updated>2026-06-19T00:00:00+00:00</updated>
+            <id>https://thephp.foundation/blog/2026/06/19/the-php-ambassador-program-is-open/</id>
+            <content type="html"><![CDATA[<p>We are excited to announce that we have scheduled the first meeting for the PHP Ambassador Program! This is the second  Special Interest Group launched by The PHP Foundation, and we are inviting you to be a part of it.</p>
+
+<p>As mentioned in our <a href="https://thephp.foundation/blog/2026/06/11/integrating-community-feedback-into-foundation-strategy-part2/#2.-php-ambassador-program">2026 Strategy document</a>, this group will be focused on improving the perception of PHP outside the PHP bubble. It will center on external advocacy and empowering the community to help tell the story of modern PHP in whatever capacity makes sense for them. Whether it be at a local open source group, inside a company, or at an open source conference, we want to provide PHP community members with the tools and resources they need to advocate on behalf of the PHP ecosystem.</p>
+
+<p>The first meeting is <strong>1 hour long</strong> and scheduled for <strong>Tuesday, June 30, 2026 at 10:30 am EDT / 2:30 pm UTC</strong>. This will be a kick-off session where we collaborate on the goals and objectives of the group and schedule a date/time for future meetings. If you would like to participate but you are unable to attend, that’s okay! (We know time zones are hard.) We will share post-meeting notes in a public repository within The PHP Foundation GitHub organization, along with ways in which you can contribute asynchronously.</p>
+
+<p>If you would like to attend our kick-off meeting, you can <a href="https://forms.gle/amMY3Anvh83jUE4Q6">fill out this form</a> to register your interest. From there, we will send you meeting details. If you have already filled this out, you do not need to fill it out again. We will be contacting you shortly.</p>
+
+<p>Please join us if you would like to help improve the perception of PHP!</p>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[PHP Through a Screen Reader: Small Syntax Choices That Matter]]></title>
+            <link href="https://thephp.foundation/blog/2026/06/16/php-through-a-screen-reader-small-syntax-choices-that-matter/"/>
+            <updated>2026-06-16T00:00:00+00:00</updated>
+            <id>https://thephp.foundation/blog/2026/06/16/php-through-a-screen-reader-small-syntax-choices-that-matter/</id>
+            <content type="html"><![CDATA[<p>I'm a backend developer, and PHP is my main language; it is also my favorite one. I've been developing in PHP since 2008, and today, when I start a web project, I choose PHP proudly, because I know what works well for me.</p>
+
+<p>There is one particularity in my developer experience: I'm totally blind from birth. So I use a <a href="https://www.visionaustralia.org/technology-products/resources/beginner-guides/introduction-to-screen-readers">screen reader</a>, a tool that sends information to speech and/or a <a href="https://www.sightadvicefaq.org.uk/technology/Reading-and-writing/Braille-Display">Braille display</a>.</p>
+
+<p>Of course, blind programmers are not a single organism with a shared configuration file. We use different tools and tolerance levels for punctuation spoken at 500 miles per hour. Still, PHP has many qualities that make it comfortable to read and write non-visually.</p>
+
+<h2 id="syntax-as-landmarks">Syntax as landmarks</h2>
+
+<p>Accessibility in programming is often discussed through tools, and tools matter a lot; but the language itself matters too, because syntax is something we hear, search, remember, and sometimes read on a Braille display.</p>
+
+<p>As we all know, every variable in PHP starts with <code>$</code>, and although this is often treated as one of those old PHP quirks people love to mention, for a screen reader user it is rather a practical landmark. I do not need to infer whether <code>user</code> is a variable, a constant, a class name, a function, or something else, because <code>$user</code> announces itself immediately. Without that marker, something like <code>User user = new User()</code> becomes, in speech, “user user equals new user left parenthesis right parenthesis”, or in my birdspeak, “user user equal new user left right”; this is understandable, yes, but it still requires a tiny effort to decrypt. A thousand tiny little efforts a day, actually.</p>
+
+<p>Functions also have a clear marker: the <code>function</code> keyword, and arrow functions have <code>fn</code>. These words are searchable, predictable anchors in a file, especially because not every blind developer lives inside a large visual IDE. Many of us use code or even text editors, command-line tools and search where they work well, so if I want to jump through functions in a file, the word <code>function</code> is my friend.</p>
+
+<p>PHP’s modern object-oriented syntax also has a pleasant rhythm:</p>
+
+<pre><code class="php">public function getDisplayName(): string
+</code></pre>
+
+<p>Maybe because I come from a linguistics background, it matters to me that this is a good phrase to hear and read: it has full words, it has structure — visibility, <code>function</code>, name, parameter list, colon, return type. I do not want to start a language war — well, not today — but when code is read linearly through speech or Braille, explicit syntax can be more comfortable than compact syntax.</p>
+
+<p>The same is true for braces and semicolons: a closing brace tells me that a block has ended, a semicolon tells me that a statement has ended, and both save me from reconstructing structure from indentation alone. Indentation is useful, of course, but braces act as milestones: block ended, period, go further.</p>
+
+<p>Naming conventions matter too. In PHP, we commonly see <code>camelCase</code>, <code>PascalCase</code>, and <code>UPPER_SNAKE_CASE</code>. For me, <code>camelCase</code> is convenient because screen readers often separate the words naturally, while <code>UPPER_SNAKE_CASE</code> constants are noticeable, especially in Braille. The ordinary snake case is harder: if punctuation is enabled, — and it is while writing code&#33; — <code>my_very_descriptive_variable_name</code> may become “my underscore very underscore descriptive underscore variable underscore name”. You can tune punctuation settings, and I have done it, but it still adds work.</p>
+
+<p>PHP is not perfect; no language is. But accessibility is not only elegance: sometimes it is predictability, explicitness, and being able to search for <code>function</code>, hear a friendly <code>$</code>, distinguish a constant on a Braille display, and know that a block ended because there is a <code>}</code>.</p>
+
+<h2 id="what-about-learning%3F">What about learning?</h2>
+
+<p>The second part of the story is learning. The PHP language itself can be friendly to assistive technology, but programming education is much more uneven. Many tutorials today are video-first, visually dense, and full of phrases like “click here”, “as you can see”, or “now we get this result”. That is fine if the important information is also spoken or written, but it becomes a barrier when the tutorial depends on visual context that is never explained.</p>
+
+<p>Here is a simple rule of thumb: close your eyes and try to understand what is happening in a course or conference talk. If you cannot, the blind part of your audience is immediately excluded. A blind learner cannot use “this button here” if “here” only means the instructor’s mouse pointer, cannot copy code from a screenshot, and cannot easily follow a refactoring if the teacher silently selects a block and says, “now we just fix it this way”.</p>
+
+<p>And this is not only about blindness. Clear teaching helps everyone: beginners, people learning in a second language, people watching on a phone, and people returning to a tutorial six months later.</p>
+
+<p>So here is my practical wish for people teaching PHP: provide the code as text, ideally in a Git repository. Say what file you are editing, say what function you are in, and do not rely only on “as you can see”. If something changes on screen, describe the change; if you show an error, read the important part of the error; if you use a diagram, briefly explain what it means. If you publish slides, make sure code examples are real text, and not just images, and consider publishing a transcript.</p>
+
+<p>Good written material also matters. PHP has always had a strong culture of documentation and examples, and that is not just convenient; it is an accessibility feature.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Accessibility is essential for users, but developers need accessibility too. For me, part of PHP’s approachability is that the code gives me landmarks: it speaks in a structure I can follow, lets me search, and marks important parts in ways that are not only visual.</p>
+
+<p>These are small things, but programming is made of small things repeated many times, and when those small things reduce friction, they let more people build.</p>
 ]]></content>
         </entry>
     </feed>
